@@ -1,3 +1,12 @@
 package edu.wpi.teamname.FloorDatabase;
 
-public class Edge {}
+import lombok.Getter;
+import lombok.Setter;
+
+public class Edge
+{
+    @Getter @Setter
+    private Node startNode;
+    @Getter @Setter
+    private Node endNode;
+}
