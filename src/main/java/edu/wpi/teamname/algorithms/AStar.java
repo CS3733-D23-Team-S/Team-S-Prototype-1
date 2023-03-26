@@ -13,12 +13,12 @@ public class AStar {
 		final Map<Node, Boolean> visitedNodes = new HashMap<Node, Boolean>();
 		final Map<Node, Node> gotHereFrom = new HashMap<Node, Node>();
 
-
+	return null;
 	}
 
-	
-	private int calcHeuristicVal(Node start, Node target){
 
+	private int calcHeuristicVal(Node start, Node target){
+		return 0;
 	}
 
 
