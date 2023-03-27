@@ -5,10 +5,11 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import lombok.Getter;
 
 public class csvConverter {
 
-  HashMap<String, FloorNode> nodes;
+  @Getter private HashMap<String, Node> nodes;
   ArrayList<Edge> edges;
 
   public csvConverter() {
@@ -16,7 +17,7 @@ public class csvConverter {
     this.edges = new ArrayList<>();
   }
 
-  public HashMap<String, FloorNode> csvToNode(String csvFilePath) {
+  public HashMap<String, Node> csvToNode(String csvFilePath) {
 
     try (BufferedReader reader = new BufferedReader(new FileReader(csvFilePath))) {
       String headerLine = reader.readLine();
@@ -24,8 +25,8 @@ public class csvConverter {
       while ((line = reader.readLine()) != null) {
         String[] fields = line.split(",");
         //
-        FloorNode thisNode =
-            new FloorNode(
+        Node thisNode =
+            new Node(
                 fields[0],
                 Integer.parseInt(fields[1]),
                 Integer.parseInt(fields[2]),
