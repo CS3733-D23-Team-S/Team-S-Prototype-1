@@ -1,8 +1,9 @@
 package edu.wpi.teamname.FloorDatabase;
 
-import java.util.LinkedList;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.LinkedList;
 
 public class Node {
   LinkedList<Node> neighbours = new LinkedList<>();
@@ -32,5 +33,9 @@ public class Node {
     this.nodeType = nodeType;
     this.longName = longName;
     this.shortName = shortName;
+  }
+
+  public void addNeighbours(Node neighbourNode) {
+    if (!neighbours.contains(neighbourNode)) neighbours.add(neighbourNode);
   }
 }
