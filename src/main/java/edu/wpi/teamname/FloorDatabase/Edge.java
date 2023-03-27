@@ -9,13 +9,9 @@ public class Edge
     private Node startNode;
     @Getter @Setter
     private Node endNode;
-    @Getter @Setter
-    private String edgeID;
 
-    public Edge(Node sN, Node eN)
-    {
-        startNode = sN;
-        endNode = eN;
-        edgeID = sN.getNodeID() + "_" + eN.getNodeID();
+    public Edge(Node startNode, Node endNode){
+        this.startNode = startNode;
+        this.endNode = endNode;
     }
 }
