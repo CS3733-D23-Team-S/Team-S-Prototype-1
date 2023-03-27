@@ -8,7 +8,7 @@ import java.util.HashMap;
 
 public class csvConverter {
 
-  HashMap<String, Node> nodes;
+  HashMap<String, FloorNode> nodes;
   ArrayList<Edge> edges;
 
   public csvConverter() {
@@ -16,7 +16,7 @@ public class csvConverter {
     this.edges = new ArrayList<>();
   }
 
-  public HashMap<String, Node> csvToNode(String csvFilePath) {
+  public HashMap<String, FloorNode> csvToNode(String csvFilePath) {
 
     try (BufferedReader reader = new BufferedReader(new FileReader(csvFilePath))) {
       String headerLine = reader.readLine();
@@ -24,8 +24,8 @@ public class csvConverter {
       while ((line = reader.readLine()) != null) {
         String[] fields = line.split(",");
         //
-        Node thisNode =
-            new Node(
+        FloorNode thisNode =
+            new FloorNode(
                 fields[0],
                 Integer.parseInt(fields[1]),
                 Integer.parseInt(fields[2]),
