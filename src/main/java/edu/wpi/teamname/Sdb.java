@@ -7,23 +7,21 @@ public class Sdb {
   private static final String user = "teams";
   private static final String password = "teams160";
 
-  public static void main(String[] args) {
+  public static void main(String[] args)
+  {
     {
       Connection c = null;
-      try
-      {
+      try {
         Class.forName("org.postgresql.Driver");
         c = DriverManager.getConnection(url, user, password);
-      }
-      catch (Exception e)
-      {
+      } catch (Exception e) {
         e.printStackTrace();
         System.err.println(e.getClass().getName() + ": " + e.getMessage());
         System.exit(0);
       }
       System.out.println("Opened database successfully");
     }
-    App.launch(App.class, args);
+    // App.launch(App.class, args);
   }
 
   // shortcut: psvm
