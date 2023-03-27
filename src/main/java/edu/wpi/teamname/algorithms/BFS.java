@@ -1,12 +1,16 @@
 package edu.wpi.teamname.algorithms;
 
 
+
 import edu.wpi.teamname.FloorDatabase.*;
+import edu.wpi.teamname.controllers.DataBaseController;
 
 import java.util.*;
 
 public class BFS {
+	DataBaseController dataBase = new DataBaseController();
 	public BFS(){
+
 	}
 
 	/* A* Pseudocode
@@ -23,25 +27,24 @@ public class BFS {
 
 	final public List<Node> findPath(Node start, Node end) {
 
-		final Queue<Node> nodesYetToSearch = new LinkedList<Node>();
-		final Map<Node, Boolean> visitedNodes = new HashMap<Node, Boolean>();
-		final Map<Node, Node> gotHereFrom = new HashMap<Node, Node>();
+		final Queue<Node> nodesYetToSearch = new LinkedList<>();
+		final Map<Node, Boolean> visitedNodes = new HashMap<>();
+		final Map<Node, Node> gotHereFrom = new HashMap<>();
 
 		nodesYetToSearch.add(start);
 		Node currentNode = start;
 		while (nodesYetToSearch.size() != 0) {
 			currentNode = nodesYetToSearch.poll();
 			if (currentNode == end) {
-				if (visitedNodes.containsKey(currentNode) == false) {
+				if (!visitedNodes.containsKey(currentNode)) {
 					return constructShortestPath(currentNode, gotHereFrom);
 				}
 			}
-			for (Node nodeToSearch : currentNode.getNeighbors()) {
-				if (visitedNodes.containsKey(nodeToSearch) == false) {
+			for (Node nodeToSearch : dataBase.getNeighbors(currentNode)) {
+				if (!visitedNodes.containsKey(nodeToSearch)) {
 					nodesYetToSearch.add(nodeToSearch);
 					gotHereFrom.put(nodeToSearch, currentNode);
 				}
-
 			}
 			visitedNodes.put(currentNode, true);
 		}
@@ -51,7 +54,7 @@ public class BFS {
 
 
 	private List<Node> constructShortestPath(Node currentNode, Map<Node, Node> gotHereFrom) {
-		final List<Node> pathTaken = new LinkedList<Node>();
+		final List<Node> pathTaken = new LinkedList<>();
 		while (gotHereFrom.get(currentNode) != null) {
 			pathTaken.add(currentNode);
 			currentNode = gotHereFrom.get(currentNode);
