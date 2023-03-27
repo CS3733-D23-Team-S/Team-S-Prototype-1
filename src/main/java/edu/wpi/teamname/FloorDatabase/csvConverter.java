@@ -15,8 +15,7 @@ public class csvConverter {
         this.nodes = new HashMap<>();
         this.edges = new ArrayList<>();
     }
-    public HashMap<String, Node> csvToNode() {
-        String csvFilePath = "src/L1Nodes.csv";
+    public HashMap<String, Node> csvToNode(String csvFilePath) {
 
         try (BufferedReader reader = new BufferedReader(new FileReader(csvFilePath))) {
             String line;
