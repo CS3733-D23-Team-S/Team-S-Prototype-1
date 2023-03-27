@@ -3,10 +3,7 @@ package edu.wpi.teamname.FloorDatabase;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.LinkedList;
-
-public class Node {
-  LinkedList<Node> neighbours = new LinkedList<>();
+public class FloorNode {
   @Getter @Setter private String nodeID;
   @Getter @Setter private int xCoord;
   @Getter @Setter private int yCoord;
@@ -16,7 +13,7 @@ public class Node {
   @Getter @Setter private String longName;
   @Getter @Setter private String shortName;
 
-  public Node(
+  public FloorNode(
       String nodeID,
       int xCoord,
       int yCoord,
@@ -33,9 +30,5 @@ public class Node {
     this.nodeType = nodeType;
     this.longName = longName;
     this.shortName = shortName;
-  }
-
-  public void addNeighbours(Node neighbourNode) {
-    if (!neighbours.contains(neighbourNode)) neighbours.add(neighbourNode);
   }
 }
