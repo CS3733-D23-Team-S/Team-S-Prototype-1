@@ -4,11 +4,11 @@ import lombok.Getter;
 import lombok.Setter;
 
 public class Edge {
-  @Getter @Setter private FloorNode startNode;
-  @Getter @Setter private FloorNode endNode;
+  @Getter @Setter private Node startNode;
+  @Getter @Setter private Node endNode;
   @Getter @Setter private String edgeID;
 
-  public Edge(FloorNode sN, FloorNode eN) {
+  public Edge(Node sN, Node eN) {
     startNode = sN;
     endNode = eN;
     edgeID = sN.getNodeID() + "_" + eN.getNodeID();
