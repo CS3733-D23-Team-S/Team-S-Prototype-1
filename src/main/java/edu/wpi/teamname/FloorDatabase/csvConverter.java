@@ -19,6 +19,7 @@ public class csvConverter {
   public HashMap<String, Node> csvToNode(String csvFilePath) {
 
     try (BufferedReader reader = new BufferedReader(new FileReader(csvFilePath))) {
+      String headerLine = reader.readLine();
       String line;
       while ((line = reader.readLine()) != null) {
         String[] fields = line.split(",");
