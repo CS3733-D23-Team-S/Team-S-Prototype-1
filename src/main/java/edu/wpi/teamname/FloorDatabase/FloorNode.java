@@ -3,7 +3,7 @@ package edu.wpi.teamname.FloorDatabase;
 import lombok.Getter;
 import lombok.Setter;
 
-public class Node {
+public class FloorNode {
   @Getter @Setter private String nodeID;
   @Getter @Setter private int xCoord;
   @Getter @Setter private int yCoord;
@@ -13,7 +13,7 @@ public class Node {
   @Getter @Setter private String longName;
   @Getter @Setter private String shortName;
 
-  public Node(
+  public FloorNode(
       String nodeID,
       int xCoord,
       int yCoord,

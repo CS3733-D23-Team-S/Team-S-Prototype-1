@@ -4,11 +4,11 @@ import java.util.List;
 
 public interface NodesDOA {
 
-	List<Node> getAllNodes();
+  List<FloorNode> getAllNodes();
 
-	Node getNeighbors(Node target);
+  FloorNode getNeighbors(FloorNode target);
 
-	void updateNode(Node target);
+  void updateNode(FloorNode target);
 
-	void deleteNode(Node target);
+  void deleteNode(FloorNode target);
 }

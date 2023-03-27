@@ -4,30 +4,27 @@ import java.util.*;
 
 public class NodesDOAImpl implements NodesDOA {
 
-	HashSet<Node> floorNodes;
-	Map<Node, ArrayList<Node>> edges;
+  HashSet<FloorNode> floorNodes;
+  Map<FloorNode, ArrayList<FloorNode>> edges;
 
-	public NodesDOAImpl() {
-		HashSet<Node> floorNodes = new HashSet<>();
-		Map<Node, ArrayList<Node>> edges = new HashMap<>();
-	}
+  public NodesDOAImpl() {
+    HashSet<FloorNode> floorNodes = new HashSet<>();
+    Map<FloorNode, ArrayList<FloorNode>> edges = new HashMap<>();
+  }
 
-	@Override
-	public List<Node> getAllNodes() {
-		return null;
-	}
+  @Override
+  public List<FloorNode> getAllNodes() {
+    return null;
+  }
 
-	@Override
-	public Node getNeighbors(Node target) {
-		return null;
-	}
+  @Override
+  public FloorNode getNeighbors(FloorNode target) {
+    return null;
+  }
 
-	@Override
-	public void updateNode(Node target) {
+  @Override
+  public void updateNode(FloorNode target) {}
 
-	}
-
-	@Override
-	public void deleteNode(Node target) {
-	}
+  @Override
+  public void deleteNode(FloorNode target) {}
 }
