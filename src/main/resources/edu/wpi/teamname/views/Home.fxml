@@ -1,34 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import io.github.palexdev.materialfx.controls.MFXButton?>
-<?import io.github.palexdev.materialfx.controls.MFXContextMenuItem?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
 
-<BorderPane prefHeight="900.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamname.controllers.HomeController">
+<BorderPane prefHeight="900.0" prefWidth="1600.0" style="-fx-background-color: #122E59;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamname.controllers.HomeController">
    <center>
       <AnchorPane prefHeight="800.0" prefWidth="800.0">
          <children>
-            <MFXContextMenuItem layoutX="771.0" layoutY="638.0" text="Menu" />
-            <MFXButton fx:id="mealDeliveryButton" layoutX="733.0" layoutY="371.0" prefHeight="33.0" prefWidth="162.0" text="Meal Delivery">
+            <MFXButton fx:id="mealDeliveryButton" layoutX="594.0" layoutY="457.0" prefHeight="75.0" prefWidth="433.0" text="Meal Delivery">
                <font>
-                  <Font name="Nunito Sans Regular" size="16.0" />
+                  <Font size="36.0" />
                </font>
             </MFXButton>
-            <MFXButton fx:id="reserveRoomButton" layoutX="732.0" layoutY="304.0" prefHeight="33.0" prefWidth="163.0" text="Reserve a Room">
+            <MFXButton fx:id="reserveRoomButton" layoutX="595.0" layoutY="349.0" prefHeight="75.0" prefWidth="431.0" text="Reserve a Room">
                <font>
-                  <Font size="16.0" />
+                  <Font size="36.0" />
                </font>
             </MFXButton>
-            <MFXButton fx:id="signageButton" layoutX="787.0" layoutY="455.0" onAction="#goToSignagePage" text="Signage" />
-            <Label fx:id="welcomeLabel" layoutX="696.0" layoutY="192.0" prefHeight="75.0" prefWidth="232.0" text="Welcome!">
+            <MFXButton fx:id="signageButton" layoutX="759.0" layoutY="585.0" onAction="#goToSignagePage" text="Signage">
                <font>
-                  <Font size="52.0" />
+                  <Font size="24.0" />
+               </font>
+            </MFXButton>
+            <Label fx:id="welcomeLabel" layoutX="593.0" layoutY="112.0" prefHeight="141.0" prefWidth="452.0" text="Welcome!" textFill="WHITE">
+               <font>
+                  <Font size="96.0" />
                </font>
             </Label>
+            <MenuButton fx:id="menuButton" layoutX="51.0" layoutY="42.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="122.0" text="Menu">
+              <items>
+                <MenuItem fx:id="exitOption" mnemonicParsing="false" onAction="#exitApplication" text="Exit" />
+              </items>
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </MenuButton>
          </children>
       </AnchorPane>
    </center>
