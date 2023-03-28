@@ -19,6 +19,8 @@ public class HomeController {
   @FXML MenuButton menuButton;
   @FXML MenuItem exitOption;
 
+  @FXML MFXButton helpButton;
+
   @FXML
   public void initialize() {
     // Adding the menu option to exit application
@@ -49,5 +51,9 @@ public class HomeController {
 
   public void exitApplication() {
     Platform.exit();
+  }
+
+  public void goToHelpPage() {
+    Navigation.navigate(Screen.HELP_PAGE);
   }
 }

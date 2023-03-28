@@ -53,6 +53,11 @@
                   <Image url="@../../../../../../../../../../Desktop/SoftwareEngineeringCS3733/Meal_Icon.jpg" />
                </image>
             </ImageView>
+            <MFXButton fx:id="helpButton" layoutX="1428.0" layoutY="813.0" onAction="#goToHelpPage" prefHeight="39.0" prefWidth="129.0" text="Help">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </MFXButton>
          </children>
       </AnchorPane>
    </center>
