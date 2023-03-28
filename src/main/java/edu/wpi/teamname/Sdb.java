@@ -10,7 +10,7 @@ public class Sdb {
   public static void main(String[] args)
   {
     {
-      Connection c = null;
+      Connection c;
       try {
         Class.forName("org.postgresql.Driver");
         c = DriverManager.getConnection(url, user, password);
