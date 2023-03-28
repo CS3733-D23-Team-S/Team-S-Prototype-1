@@ -1,9 +1,8 @@
 package edu.wpi.teamname;
 
-import edu.wpi.teamname.FloorDatabase.Edge;
-import edu.wpi.teamname.FloorDatabase.Node;
-import edu.wpi.teamname.FloorDatabase.NodesDAOImpl;
-import edu.wpi.teamname.FloorDatabase.csvConverter;
+import edu.wpi.teamname.FloorDatabase.*;
+
+import java.sql.Connection;
 import java.sql.SQLException;
 
 public class Sdb {
@@ -16,9 +15,11 @@ public class Sdb {
       System.out.println(thisEdge.toString());
     }
 
-    NodesDAOImpl mapDatabase = new NodesDAOImpl();
-    mapDatabase.establishConnection();
-    mapDatabase.initTables();
+  DAOImpl dbManager = new DAOImpl();
+    Connection connection = dbManager.establishConnection();
+    dbManager.initTables();
+    NodesDAOImpl mapDatabase = new NodesDAOImpl(connection);
+    EdgesDAOImpl edgeDatabase = new EdgesDAOImpl(connection);
 
     for (Node thisNode : converter.getNodes().values()) {
       mapDatabase.addNode(thisNode);
