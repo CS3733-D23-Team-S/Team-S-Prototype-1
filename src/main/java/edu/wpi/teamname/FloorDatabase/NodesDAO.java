@@ -7,7 +7,7 @@ public interface NodesDAO {
 
   List<Node> getAllNodes();
 
-  void addNode(Node thisNode);
+  void addNode(Node thisNode) throws SQLException;
 
   Node getNeighbors(Node target);
 
@@ -19,7 +19,7 @@ public interface NodesDAO {
 
   void initTables() throws SQLException;
 
-//  boolean checkTablePresence() throws SQLException;
+  //  boolean checkTablePresence() throws SQLException;
 
   void resetData() throws SQLException;
 

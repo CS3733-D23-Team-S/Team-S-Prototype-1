@@ -29,7 +29,9 @@ public class NodesDAOImpl implements NodesDAO {
   }
 
   @Override
-  public void addNode(Node thisNode) {
+  public void addNode(Node thisNode) throws SQLException {
+    String nodeID = thisNode.getNodeID();
+
     try {
       PreparedStatement preparedStatement =
           c.prepareStatement(
