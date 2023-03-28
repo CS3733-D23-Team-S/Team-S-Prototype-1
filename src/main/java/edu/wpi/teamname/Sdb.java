@@ -16,10 +16,14 @@ public class Sdb {
     }
 
     NodesDAOImpl mapDatabase = new NodesDAOImpl();
+
+    //Establish Conection to database
     mapDatabase.establishConnection();
+
+    //Create empty table
     mapDatabase.initTable();
-//        for (Node thisNode : converter.getNodes().values()) {
-//          mapDatabase.addNode(thisNode);
-//        }
+    //        for (Node thisNode : converter.getNodes().values()) {
+    //          mapDatabase.addNode(thisNode);
+    //        }
   }
 }

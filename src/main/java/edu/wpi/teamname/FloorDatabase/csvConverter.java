@@ -17,7 +17,7 @@ public class csvConverter {
     this.edges = new ArrayList<>();
   }
 
-  public HashMap<String, Node> csvToNode(String csvFilePath) {
+  public void csvToNode(String csvFilePath) {
 
     try (BufferedReader reader = new BufferedReader(new FileReader(csvFilePath))) {
       String headerLine = reader.readLine();
@@ -40,11 +40,9 @@ public class csvConverter {
     } catch (IOException e) {
       e.printStackTrace();
     }
-
-    return nodes;
   }
 
-  public ArrayList<Edge> csvToEdges(String csvFilePath) {
+  public void csvToEdges(String csvFilePath) {
 
     try (BufferedReader reader = new BufferedReader(new FileReader(csvFilePath))) {
       String headerLine = reader.readLine();
@@ -58,7 +56,5 @@ public class csvConverter {
     } catch (IOException e) {
       e.printStackTrace();
     }
-
-    return edges;
   }
 }
