@@ -1,21 +1,13 @@
 package edu.wpi.teamname.FloorDatabase;
 
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
-public interface NodesDAO {
+public interface DAO_I {
 
-  List<Node> getAllNodes();
 
-  void addNode(Node thisNode);
-
-  Node getNeighbors(Node target);
-
-  void updateNode(Node target);
-
-  void deleteNode(Node target);
-
-  void establishConnection();
+  Connection establishConnection();
 
   void initTables() throws SQLException;
 
