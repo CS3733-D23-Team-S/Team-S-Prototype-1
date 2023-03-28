@@ -1,6 +1,8 @@
 package edu.wpi.teamname.FloorDatabase;
 
-public class edgeTable extends Table
+import java.util.List;
+
+public class edgeTable
 {
     public Edge getRow(Edge target)
     {
@@ -14,5 +16,8 @@ public class edgeTable extends Table
     public void deleteRow(Edge target)
     {
 
+    }
+    public List<Node> getNeighbors(Node target) {
+        return null;
     }
 }

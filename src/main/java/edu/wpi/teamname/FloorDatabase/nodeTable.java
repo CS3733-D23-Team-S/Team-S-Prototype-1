@@ -1,6 +1,6 @@
 package edu.wpi.teamname.FloorDatabase;
 
-public class nodeTable extends Table
+public class nodeTable
 {
     public Node getRow(Node target)
     {
