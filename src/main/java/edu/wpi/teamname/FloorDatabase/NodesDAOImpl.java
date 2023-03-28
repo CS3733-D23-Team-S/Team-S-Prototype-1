@@ -8,7 +8,9 @@ public class NodesDAOImpl implements NodesDAO {
   private static final String url = "jdbc:postgresql://database.cs.wpi.edu:5432/teamsdb";
   private static final String user = "teams";
   private static final String password = "teams160";
-  private static final String floorNodeTableName = "floorTable";
+  private static final String floorNodeTableName = "floortable";
+
+  private static final String schemaName = "hospitaldb";
   private static final String edgesTableName = " edgestable";
 
   Connection c;
@@ -80,6 +82,16 @@ public class NodesDAOImpl implements NodesDAO {
 
   @Override
   public void initTable() throws SQLException {
+    PreparedStatement preparedStatement =
+        c.prepareStatement(
+            "CREATE TABLE IF NOT EXISTS floortable ("
+                + "nodeID Varchar(100) PRIMARY KEY,"
+                + "xCoord int,"
+                + "yCoord int,"
+                + "Floor int,"
+                + "Building Varchar(100),"
+                + "longName Varchar(100),"
+                + "shortName Varchar(100))");
 
     Statement stmt = c.createStatement();
     try {
@@ -103,8 +115,7 @@ public class NodesDAOImpl implements NodesDAO {
               + "endNode Varchar(100),"
               + "edgeID Varchar(100))";
 
-      stmt.execute(floorTableConstruct);
-      stmt.execute(edgeTableConstruct);
+      preparedStatement.executeUpdate();
       // import and load the csv files
       System.out.println("Loaded the edges and floor nodes into the database");
     } catch (SQLException e) {
