@@ -10,7 +10,7 @@ import lombok.Getter;
 public class csvConverter {
 
   @Getter private HashMap<String, Node> nodes;
-  @Getter ArrayList<Edge> edges;
+  @Getter private ArrayList<Edge> edges;
 
   public csvConverter() {
     this.nodes = new HashMap<>();

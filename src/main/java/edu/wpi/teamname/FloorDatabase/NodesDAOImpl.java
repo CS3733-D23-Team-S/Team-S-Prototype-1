@@ -17,7 +17,7 @@ public class NodesDAOImpl extends DAOImpl implements DAO_I {
     super.c = c;
   }
 
-  public void updateNode(String nodeId, String longName) {
+  public void updateNodeLoc(String nodeId, String longName) {
     try {
       PreparedStatement preparedStatement =
           c.prepareStatement("UPDATE hospitaldb.floortable SET longname = ? WHERE nodeID = ?");

@@ -15,19 +15,26 @@ public class Sdb {
     }
 
     DAOImpl dbManager = new DAOImpl();
+
+    //Establish connection to database
     Connection connection = dbManager.establishConnection();
 
+    //Create Empty Table
     dbManager.initTables();
 
     NodesDAOImpl mapDatabase = new NodesDAOImpl(connection);
     EdgesDAOImpl edgeDatabase = new EdgesDAOImpl(connection);
+
+    //Inputing Nodes into Data base
     for (Node thisNode : converter.getNodes().values()) {
       mapDatabase.addNode(thisNode);
     }
+
+    //Inputting Edges into Database
     for (Edge thisEdge : converter.getEdges()) {
       edgeDatabase.addEdge(thisEdge);
     }
 
-    mapDatabase.updateNode("CLABS002L1", "White House");
+    mapDatabase.updateNodeLoc("CLABS002L1", "White House");
   }
 }
