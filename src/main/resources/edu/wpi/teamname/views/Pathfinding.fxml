@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import io.github.palexdev.materialfx.controls.MFXTextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #122E59;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+   <top>
+      <AnchorPane prefHeight="15.0" prefWidth="600.0" style="-fx-background-color: #D9D9D9;" BorderPane.alignment="CENTER">
+         <children>
+            <MFXTextField alignment="TOP_LEFT" editable="false" floatMode="ABOVE" prefHeight="46.0" prefWidth="600.0" style="-fx-background-color: #D9D9D9;" text="Brigham &amp; Women's Hospital - Founding Member, Mass General Brigham" />
+            <MFXButton fx:id="pathfindingHelpButton" layoutX="531.0" layoutY="11.0" text="Help" />
+            <MFXButton fx:id="pathfindingToHomeButton" layoutX="455.0" layoutY="11.0" text="Home" />
+         </children>
+      </AnchorPane>
+   </top>
+   <center>
+      <AnchorPane prefHeight="130.0" prefWidth="438.0" BorderPane.alignment="CENTER">
+         <children>
+<!--            <ImageView fitHeight="354.0" fitWidth="486.0" layoutX="116.0" pickOnBounds="true" preserveRatio="true">-->
+<!--               <image>-->
+<!--                  <Image url="@../../../../../../../../../../Pictures/Screenshots/Screenshot%202023-03-28%20181400.png" />-->
+<!--               </image>-->
+<!--            </ImageView>-->
+            <MFXButton layoutY="317.0" prefHeight="37.0" prefWidth="115.0" style="-fx-background-color: #000000; -fx-background-color: #D9D9D9;" text="Find Path" />
+            <ImageView fitHeight="354.0" fitWidth="487.0" layoutX="116.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../../../../../../../Pictures/Screenshots/Screenshot%202023-03-28%20181400.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+   </center>
+</BorderPane>
