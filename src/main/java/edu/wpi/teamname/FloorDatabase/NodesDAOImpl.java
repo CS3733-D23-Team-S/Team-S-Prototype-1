@@ -9,7 +9,7 @@ public class NodesDAOImpl implements NodesDAO {
   private static final String user = "teams";
   private static final String password = "teams160";
   private static final String floorNodeTableName = "floorTable";
-  private static final String edgesTableName = " edgesTable";
+  private static final String edgesTableName = " edgestable";
 
   Connection c;
 
