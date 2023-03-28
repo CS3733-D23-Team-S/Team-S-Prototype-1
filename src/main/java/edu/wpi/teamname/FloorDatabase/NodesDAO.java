@@ -5,20 +5,21 @@ import java.util.List;
 
 public interface NodesDAO {
 
-	List<Node> getAllNodes();
+  List<Node> getAllNodes();
 
-	Node getNeighbors(Node target);
+  void addNode(Node thisNode);
 
-	void updateNode(Node target);
+  Node getNeighbors(Node target);
 
-	void deleteNode(Node target);
+  void updateNode(Node target);
 
-	void establishConnection();
+  void deleteNode(Node target);
 
-	void initTable() throws SQLException;
+  void establishConnection();
 
-	void resetData() throws SQLException;
+  void initTable() throws SQLException;
 
-	void constructLocalDataBase() throws SQLException;
+  void resetData() throws SQLException;
 
+  void constructLocalDataBase() throws SQLException;
 }
