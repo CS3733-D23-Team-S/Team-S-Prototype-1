@@ -17,7 +17,9 @@ public interface NodesDAO {
 
   void establishConnection();
 
-  void initTable() throws SQLException;
+  void initTables() throws SQLException;
+
+//  boolean checkTablePresence() throws SQLException;
 
   void resetData() throws SQLException;
 
