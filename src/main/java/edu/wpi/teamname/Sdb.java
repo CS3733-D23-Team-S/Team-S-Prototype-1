@@ -1,25 +1,25 @@
 package edu.wpi.teamname;
 
-import java.sql.*;
+import edu.wpi.teamname.FloorDatabase.Edge;
+import edu.wpi.teamname.FloorDatabase.Node;
+import edu.wpi.teamname.FloorDatabase.NodesDAOImpl;
+import edu.wpi.teamname.FloorDatabase.csvConverter;
+import java.sql.SQLException;
 
 public class Sdb {
-  private static final String url = "jdbc:postgresql://database.cs.wpi.edu:5432/teamsdb";
-  private static final String user = "teams";
-  private static final String password = "teams160";
+  public static void main(String[] args) throws SQLException {
+    csvConverter converter = new csvConverter();
+    converter.csvToNode("src/main/java/edu/wpi/teamname/L1Nodes.csv");
+    converter.csvToEdges("src/main/java/edu/wpi/teamname/L1Edges.csv");
+    for (Edge thisEdge : converter.getEdges()) {
+      System.out.println(thisEdge.toString());
+    }
 
-  public static void main(String[] args)
-  {
-      Connection c;
-
-      try {
-        Class.forName("org.postgresql.Driver");
-        c = DriverManager.getConnection(url, user, password);
-      } catch (Exception e) {
-        e.printStackTrace();
-        System.err.println(e.getClass().getName() + ": " + e.getMessage());
-        System.exit(0);
-      }
-      System.out.println("Opened database successfully");
-    // App.launch(App.class, args);
+    NodesDAOImpl mapDatabase = new NodesDAOImpl();
+    mapDatabase.establishConnection();
+    mapDatabase.initTable();
+    for (Node thisNode : converter.getNodes().values()) {
+      mapDatabase.addNode(thisNode);
+    }
   }
 }
