@@ -11,6 +11,19 @@ public class Edge {
   public Edge(Node sN, Node eN) {
     startNode = sN;
     endNode = eN;
-    // edgeID = sN.getNodeID() + "_" + eN.getNodeID();
+    edgeID = sN.getNodeID() + "_" + eN.getNodeID();
+  }
+
+  @Override
+  public String toString() {
+    return "Edge{"
+        + "startNode="
+        + startNode
+        + ", endNode="
+        + endNode
+        + ", edgeID='"
+        + edgeID
+        + '\''
+        + '}';
   }
 }

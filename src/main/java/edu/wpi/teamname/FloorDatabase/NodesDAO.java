@@ -7,6 +7,8 @@ public interface NodesDAO {
 
   List<Node> getAllNodes();
 
+  void addNode(Node thisNode);
+
   Node getNeighbors(Node target);
 
   void updateNode(Node target);

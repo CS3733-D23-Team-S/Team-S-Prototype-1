@@ -1,16 +1,17 @@
 package edu.wpi.teamname.FloorDatabase;
 
+import lombok.Getter;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import lombok.Getter;
 
 public class csvConverter {
 
   @Getter private HashMap<String, Node> nodes;
-  ArrayList<Edge> edges;
+  @Getter ArrayList<Edge> edges;
 
   public csvConverter() {
     this.nodes = new HashMap<>();
@@ -47,11 +48,12 @@ public class csvConverter {
   public ArrayList<Edge> csvToEdges(String csvFilePath) {
 
     try (BufferedReader reader = new BufferedReader(new FileReader(csvFilePath))) {
+      String headerLine = reader.readLine();
       String line;
       while ((line = reader.readLine()) != null) {
         String[] fields = line.split(",");
         //
-        Edge thisEdge = new Edge(nodes.get((fields[1])), nodes.get((fields[1])));
+        Edge thisEdge = new Edge(nodes.get((fields[1])), nodes.get((fields[2])));
         edges.add(thisEdge);
       }
     } catch (IOException e) {

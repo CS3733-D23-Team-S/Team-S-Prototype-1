@@ -31,4 +31,9 @@ public class Node {
     this.longName = longName;
     this.shortName = shortName;
   }
+
+  @Override
+  public String toString() {
+    return "Node{" + "nodeID='" + nodeID + '\'' + '}';
+  }
 }
