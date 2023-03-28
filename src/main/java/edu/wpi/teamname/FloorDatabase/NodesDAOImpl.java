@@ -9,9 +9,9 @@ public class NodesDAOImpl implements NodesDAO {
   private static final String user = "teams";
   private static final String password = "teams160";
   private static final String floorNodeTableName = "floortable";
+  private static final String edgesTableName = "edgestable";
 
   private static final String schemaName = "hospitaldb";
-  private static final String edgesTableName = " edgestable";
 
   Connection c;
 
@@ -31,17 +31,8 @@ public class NodesDAOImpl implements NodesDAO {
   @Override
   public void addNode(Node thisNode) {
     try {
-      //      + " "
-      //              + "(nodeID Varchar(100),"
-      //              + "xCoord int,"
-      //              + "yCoord int,"
-      //              + "Floor int,"
-      //              + "Building Varchar(100),"
-      //              + "longName Varchar(100),"
-      //              + "shortName Varchar(100))";
-
       PreparedStatement preparedStatement =
-          c.prepareStatement("INSERT INTO floorTable VALUES (?, ?, ? ,?, ?, ?, ?)");
+          c.prepareStatement("INSERT INTO " + floorNodeTableName + " VALUES (?, ?, ? ,?, ?, ?, ?)");
       preparedStatement.setString(1, thisNode.getNodeID());
       preparedStatement.setString(2, String.valueOf(thisNode.getXCoord()));
       preparedStatement.setString(3, String.valueOf(thisNode.getYCoord()));
@@ -82,43 +73,39 @@ public class NodesDAOImpl implements NodesDAO {
 
   @Override
   public void initTable() throws SQLException {
-    PreparedStatement preparedStatement =
-        c.prepareStatement(
-            "CREATE TABLE IF NOT EXISTS floortable ("
-                + "nodeID Varchar(100) PRIMARY KEY,"
-                + "xCoord int,"
-                + "yCoord int,"
-                + "Floor int,"
-                + "Building Varchar(100),"
-                + "longName Varchar(100),"
-                + "shortName Varchar(100))");
-
     Statement stmt = c.createStatement();
+    String createSchema = "CREATE SCHEMA IF NOT EXISTS " + schemaName;
+    String floorTableConstruct =
+        "CREATE TABLE IF NOT EXISTS "
+            + schemaName
+            + "."
+            + floorNodeTableName
+            + " "
+            + "(nodeID Varchar(100) PRIMARY KEY,"
+            + "xCoord int,"
+            + "yCoord int,"
+            + "Floor int,"
+            + "Building Varchar(100),"
+            + "longName Varchar(100),"
+            + "shortName Varchar(100))";
+
+    String edgeTableConstruct =
+        "CREATE TABLE IF NOT EXISTS "
+            + schemaName
+            + "."
+            + edgesTableName
+            + " "
+            + "(startNode Varchar(100),"
+            + "endNode Varchar(100),"
+            + "edgeID Varchar(100))";
     try {
-      String floorTableConstruct =
-          "CREATE TABLE IF NOT EXISTS "
-              + floorNodeTableName
-              + " "
-              + "(nodeID Varchar(100),"
-              + "xCoord int,"
-              + "yCoord int,"
-              + "Floor int,"
-              + "Building Varchar(100),"
-              + "longName Varchar(100),"
-              + "shortName Varchar(100))";
-
-      String edgeTableConstruct =
-          "CREATE TABLE IF NOT EXISTS "
-              + edgesTableName
-              + " "
-              + "(startNode Varchar(100),"
-              + "endNode Varchar(100),"
-              + "edgeID Varchar(100))";
-
-      preparedStatement.executeUpdate();
-      // import and load the csv files
-      System.out.println("Loaded the edges and floor nodes into the database");
+      stmt.execute(createSchema);
+      stmt.executeUpdate(floorTableConstruct);
+      stmt.executeUpdate(edgeTableConstruct);
+      System.out.println("Loaded the edges and floor tables into the database");
     } catch (SQLException e) {
+      System.out.println(e.getMessage());
+      System.out.println(e.getSQLState());
       System.out.println("Database update/creation error");
     }
   }
@@ -126,8 +113,9 @@ public class NodesDAOImpl implements NodesDAO {
   @Override
   public void resetData() throws SQLException {
     Statement stmt = c.createStatement();
+    String resetCommand = "DROP DATABASE IF EXISTS " + schemaName;
     try {
-      String resetCommand = null;
+      stmt.executeUpdate(resetCommand);
     } catch (Exception e) {
       System.out.println("Database update/creation error");
     }
