@@ -2,14 +2,15 @@ package edu.wpi.teamname.FloorDatabase;
 
 import lombok.Getter;
 
-import java.sql.*;
-import java.util.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.HashSet;
+import java.util.List;
 
 public class NodesDAOImpl extends DAOImpl implements DAO_I {
 
-  @Getter
-  private HashSet<Node> nodes;
-
+  @Getter private HashSet<Node> nodes;
 
   public NodesDAOImpl(Connection c) {
     HashSet<Node> nodes = new HashSet<>();
@@ -17,15 +18,14 @@ public class NodesDAOImpl extends DAOImpl implements DAO_I {
   }
 
   public void updateNode(Node target) {
-    //Handles the edge updates as well
+    // Handles the edge updates as well
   }
 
   public List<Node> getAllNodes() {
     return null;
   }
 
-  public void deleteNode(Node target) {
-  }
+  public void deleteNode(Node target) {}
 
   public void addNode(Node thisNode) {
     try {
@@ -48,5 +48,4 @@ public class NodesDAOImpl extends DAOImpl implements DAO_I {
       e.printStackTrace();
     }
   }
-
 }
