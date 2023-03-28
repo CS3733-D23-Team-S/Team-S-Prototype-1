@@ -9,8 +9,8 @@ public class Sdb {
 
   public static void main(String[] args)
   {
-    {
       Connection c;
+
       try {
         Class.forName("org.postgresql.Driver");
         c = DriverManager.getConnection(url, user, password);
@@ -20,10 +20,6 @@ public class Sdb {
         System.exit(0);
       }
       System.out.println("Opened database successfully");
-    }
     // App.launch(App.class, args);
   }
-
-  // shortcut: psvm
-
 }
