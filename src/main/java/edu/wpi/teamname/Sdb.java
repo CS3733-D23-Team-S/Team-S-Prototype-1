@@ -1,8 +1,7 @@
 package edu.wpi.teamname;
 
-import edu.wpi.teamname.FloorDatabase.Edge;
-import edu.wpi.teamname.FloorDatabase.NodesDAOImpl;
-import edu.wpi.teamname.FloorDatabase.csvConverter;
+import edu.wpi.teamname.FloorDatabase.*;
+import java.sql.Connection;
 import java.sql.SQLException;
 
 public class Sdb {
@@ -15,15 +14,20 @@ public class Sdb {
       System.out.println(thisEdge.toString());
     }
 
-    NodesDAOImpl mapDatabase = new NodesDAOImpl();
+    DAOImpl dbManager = new DAOImpl();
+    Connection connection = dbManager.establishConnection();
 
-    //Establish Conection to database
-    mapDatabase.establishConnection();
+    dbManager.initTables();
 
-    //Create empty table
-    mapDatabase.initTable();
-    //        for (Node thisNode : converter.getNodes().values()) {
-    //          mapDatabase.addNode(thisNode);
-    //        }
+    NodesDAOImpl mapDatabase = new NodesDAOImpl(connection);
+    EdgesDAOImpl edgeDatabase = new EdgesDAOImpl(connection);
+    for (Node thisNode : converter.getNodes().values()) {
+      mapDatabase.addNode(thisNode);
+    }
+    for (Edge thisEdge : converter.getEdges()) {
+      edgeDatabase.addEdge(thisEdge);
+    }
+
+    mapDatabase.updateNode("CLABS002L1", "White House");
   }
 }
