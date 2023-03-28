@@ -29,6 +29,9 @@ public class DAOImpl {
 
   public void initTables() throws SQLException {
     Statement stmt = c.createStatement();
+    String dropEdgeTable = "DROP TABLE IF EXISTS " + edgesTableName;
+    String dropFloorTable = "DROP TABLE IF EXISTS " + floorNodeTableName + " CASCADE";
+
     String createSchema = "CREATE SCHEMA IF NOT EXISTS " + schemaName;
     String floorTableConstruct =
         "CREATE TABLE IF NOT EXISTS "
@@ -46,9 +49,14 @@ public class DAOImpl {
             + " "
             + "(startNode Varchar(100),"
             + "endNode Varchar(100),"
-            + "edgeID Varchar(100))";
+            + "edgeID Varchar(100),"
+            + "foreign key (startNode) references hospitaldb.floortable(nodeID),"
+            + " foreign key (endNode) references hospitaldb.floortable(nodeID))";
     try {
+
       stmt.execute(createSchema);
+      stmt.execute(dropFloorTable);
+      stmt.execute(dropEdgeTable);
       stmt.executeUpdate(floorTableConstruct);
       stmt.executeUpdate(edgeTableConstruct);
       System.out.println("Loaded the edges and floor tables into the database");

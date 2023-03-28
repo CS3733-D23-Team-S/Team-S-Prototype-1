@@ -16,10 +16,18 @@ public class Sdb {
 
     DAOImpl dbManager = new DAOImpl();
     Connection connection = dbManager.establishConnection();
-    dbManager.resetData();
+
     dbManager.initTables();
 
     NodesDAOImpl mapDatabase = new NodesDAOImpl(connection);
     EdgesDAOImpl edgeDatabase = new EdgesDAOImpl(connection);
+    for (Node thisNode : converter.getNodes().values()) {
+      mapDatabase.addNode(thisNode);
+    }
+    for (Edge thisEdge : converter.getEdges()) {
+      edgeDatabase.addEdge(thisEdge);
+    }
+
+    mapDatabase.updateNode("CLABS002L1", "White House");
   }
 }

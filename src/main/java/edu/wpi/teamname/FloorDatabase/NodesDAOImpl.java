@@ -17,7 +17,19 @@ public class NodesDAOImpl extends DAOImpl implements DAO_I {
     super.c = c;
   }
 
-  public void updateNode(Node target) {
+  public void updateNode(String nodeId, String longName) {
+    try {
+      PreparedStatement preparedStatement =
+          c.prepareStatement("UPDATE hospitaldb.floortable SET longname = ? WHERE nodeID = ?");
+      preparedStatement.setString(1, longName);
+      preparedStatement.setString(2, nodeId);
+
+      preparedStatement.executeUpdate();
+      System.out.println("Updated Node");
+    } catch (SQLException e) {
+      e.printStackTrace();
+      // Handle the exception appropriately
+    }
     // Handles the edge updates as well
   }
 
