@@ -3,14 +3,43 @@ package edu.wpi.teamname.controllers;
 import edu.wpi.teamname.navigation.Navigation;
 import edu.wpi.teamname.navigation.Screen;
 import io.github.palexdev.materialfx.controls.MFXButton;
+import java.awt.*;
 import javafx.fxml.FXML;
+import javafx.scene.layout.VBox;
 
 public class HomeController {
+  private VBox buttonLayout;
+  @FXML MFXButton mealDeliveryButton;
+  @FXML MFXButton reserveRoomButton;
 
-  @FXML MFXButton navigateButton;
+  @FXML MFXButton signageButton;
 
   @FXML
   public void initialize() {
-    navigateButton.setOnMouseClicked(event -> Navigation.navigate(Screen.SERVICE_REQUEST));
+    // Adding the menu option to exit application
+    Menu menu = new Menu("Menu");
+    MenuItem option1 = new MenuItem("Exit");
+    menu.add(option1);
+    mealDeliveryButton.setOnMouseClicked(event -> goToMealPage());
+    reserveRoomButton.setOnMouseClicked(event -> goToRoomPage());
+    signageButton.setOnMouseClicked(event -> goToSignagePage());
+
+    // event handler for exiting application
+
+    //    mealDeliveryButton.setOnMouseClicked(event ->
+    // Navigation.navigate(Screen.SERVICE_REQUEST));
+    //    reserveRoomButton.setOnMouseClicked(event -> Navigation.navigate(Screen.SERVICE_REQUEST));
+  }
+
+  public void goToRoomPage() {
+    Navigation.navigate(Screen.SERVICE_REQUEST);
+  }
+
+  public void goToMealPage() {
+    Navigation.navigate(Screen.SERVICE_REQUEST);
+  }
+
+  public void goToSignagePage() {
+    Navigation.navigate(Screen.SERVICE_REQUEST);
   }
 }
