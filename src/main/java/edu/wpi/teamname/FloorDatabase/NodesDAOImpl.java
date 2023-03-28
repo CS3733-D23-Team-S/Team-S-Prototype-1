@@ -32,14 +32,20 @@ public class NodesDAOImpl implements NodesDAO {
   public void addNode(Node thisNode) {
     try {
       PreparedStatement preparedStatement =
-          c.prepareStatement("INSERT INTO " + floorNodeTableName + " VALUES (?, ?, ? ,?, ?, ?, ?)");
-      preparedStatement.setString(1, thisNode.getNodeID());
-      preparedStatement.setString(2, String.valueOf(thisNode.getXCoord()));
-      preparedStatement.setString(3, String.valueOf(thisNode.getYCoord()));
-      preparedStatement.setString(4, String.valueOf(thisNode.getFloor()));
-      preparedStatement.setString(5, thisNode.getBuilding());
-      preparedStatement.setString(6, thisNode.getLongName());
-      preparedStatement.setString(7, thisNode.getShortName());
+          c.prepareStatement(
+              "INSERT INTO "
+                  + schemaName
+                  + "."
+                  + floorNodeTableName
+                  + " (nodeID ,xCoord ,yCoord , Floor ,Building, longName, shortName) "
+                  + " VALUES (?, ?, ? ,?, ?, ?, ?)");
+      preparedStatement.setString(1, "'" + thisNode.getNodeID() + "'");
+      preparedStatement.setInt(2, thisNode.getXCoord());
+      preparedStatement.setInt(3, thisNode.getYCoord());
+      preparedStatement.setInt(4, thisNode.getFloor().ordinal());
+      preparedStatement.setString(5, "'" + thisNode.getBuilding() + "'");
+      preparedStatement.setString(6, "'" + thisNode.getLongName() + "'");
+      preparedStatement.setString(7, "'" + thisNode.getShortName() + "'");
 
       preparedStatement.executeUpdate();
     } catch (SQLException e) {
@@ -72,7 +78,7 @@ public class NodesDAOImpl implements NodesDAO {
   }
 
   @Override
-  public void initTable() throws SQLException {
+  public void initTables() throws SQLException {
     Statement stmt = c.createStatement();
     String createSchema = "CREATE SCHEMA IF NOT EXISTS " + schemaName;
     String floorTableConstruct =
@@ -116,8 +122,11 @@ public class NodesDAOImpl implements NodesDAO {
     String resetCommand = "DROP DATABASE IF EXISTS " + schemaName;
     try {
       stmt.executeUpdate(resetCommand);
-    } catch (Exception e) {
-      System.out.println("Database update/creation error");
+      System.out.println("Deleted the database");
+    } catch (SQLException e) {
+      System.out.println(e.getMessage());
+      System.out.println(e.getSQLState());
+      System.out.println("Could not reset the database");
     }
   }
 
