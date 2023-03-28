@@ -1,12 +1,11 @@
 package edu.wpi.teamname.FloorDatabase;
 
-import lombok.Getter;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.HashSet;
 import java.util.List;
+import lombok.Getter;
 
 public class NodesDAOImpl extends DAOImpl implements DAO_I {
 
@@ -20,7 +19,8 @@ public class NodesDAOImpl extends DAOImpl implements DAO_I {
   public void updateNodeLoc(String nodeId, String longName) {
     try {
       PreparedStatement preparedStatement =
-          c.prepareStatement("UPDATE hospitaldb.floortable SET longname = ? WHERE nodeID = ?");
+          c.prepareStatement("UPDATE hospitaldb.nodes SET longname = ? WHERE nodeID = ?");
+
       preparedStatement.setString(1, longName);
       preparedStatement.setString(2, nodeId);
 
@@ -51,7 +51,7 @@ public class NodesDAOImpl extends DAOImpl implements DAO_I {
       preparedStatement.setInt(2, thisNode.getXCoord());
       preparedStatement.setInt(3, thisNode.getYCoord());
       preparedStatement.setInt(4, thisNode.getFloor().ordinal());
-      preparedStatement.setString(5,  thisNode.getBuilding());
+      preparedStatement.setString(5, thisNode.getBuilding());
       preparedStatement.setString(6, thisNode.getLongName());
       preparedStatement.setString(7, thisNode.getShortName());
 

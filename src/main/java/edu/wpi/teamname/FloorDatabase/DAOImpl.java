@@ -10,8 +10,8 @@ public class DAOImpl {
   private static final String user = "teams";
   private static final String password = "teams160";
   protected static final String schemaName = "hospitaldb";
-  protected static final String floorNodeTableName = schemaName + "." + "floortable";
-  protected static final String edgesTableName = schemaName + "." + "edgestable";
+  protected static final String floorNodeTableName = schemaName + "." + "nodes";
+  protected static final String edgesTableName = schemaName + "." + "edges";
   Connection c;
 
   public Connection establishConnection() {
@@ -50,8 +50,12 @@ public class DAOImpl {
             + "(startNode Varchar(100),"
             + "endNode Varchar(100),"
             + "edgeID Varchar(100),"
-            + "foreign key (startNode) references hospitaldb.floortable(nodeID),"
-            + " foreign key (endNode) references hospitaldb.floortable(nodeID))";
+            + "foreign key (startNode) references "
+            + floorNodeTableName
+            + "(nodeID),"
+            + "foreign key (endNode) references "
+            + floorNodeTableName
+            + "(nodeID))";
     try {
 
       stmt.execute(createSchema);

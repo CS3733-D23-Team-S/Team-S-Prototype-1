@@ -36,9 +36,9 @@ public class EdgesDAOImpl extends DAOImpl implements DAO_I {
                   + edgesTableName
                   + " (startNode, endNode, edgeID) "
                   + " VALUES (?, ?, ? )");
-      preparedStatement.setString(1, "'" + thisEdge.getStartNode().getNodeID() + "'");
-      preparedStatement.setString(2, "'" + thisEdge.getEndNode().getNodeID() + "'");
-      preparedStatement.setString(3, "'" + thisEdge.getEdgeID() + "'");
+      preparedStatement.setString(1, thisEdge.getStartNode().getNodeID());
+      preparedStatement.setString(2, thisEdge.getEndNode().getNodeID());
+      preparedStatement.setString(3, thisEdge.getEdgeID());
 
       preparedStatement.executeUpdate();
     } catch (SQLException e) {

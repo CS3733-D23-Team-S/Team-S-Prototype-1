@@ -16,21 +16,21 @@ public class Sdb {
 
     DAOImpl dbManager = new DAOImpl();
 
-    //Establish connection to database
+    // Establish connection to database
     Connection connection = dbManager.establishConnection();
 
-    //Create Empty Table
+    // Create Empty Table
     dbManager.initTables();
 
     NodesDAOImpl mapDatabase = new NodesDAOImpl(connection);
     EdgesDAOImpl edgeDatabase = new EdgesDAOImpl(connection);
 
-    //Inputing Nodes into Data base
+    // Inputing Nodes into Data base
     for (Node thisNode : converter.getNodes().values()) {
       mapDatabase.addNode(thisNode);
     }
 
-    //Inputting Edges into Database
+    // Inputting Edges into Database
     for (Edge thisEdge : converter.getEdges()) {
       edgeDatabase.addEdge(thisEdge);
     }
