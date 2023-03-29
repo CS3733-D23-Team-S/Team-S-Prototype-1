@@ -31,4 +31,33 @@ public class Node {
     this.longName = longName;
     this.shortName = shortName;
   }
+
+  @Override
+  public String toString() {
+
+    return "Node{"
+        + "nodeID="
+        + nodeID
+        + "  "
+        + "coords=("
+        + xCoord
+        + ", "
+        + yCoord
+        + "  "
+        + "floor="
+        + floor
+        + "  "
+        + "building="
+        + building
+        + "  "
+        + "nodeType="
+        + nodeType
+        + "  "
+        + "longName="
+        + longName
+        + "  "
+        + "shortName="
+        + shortName
+        + "}";
+  }
 }
