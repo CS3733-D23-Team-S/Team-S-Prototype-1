@@ -56,7 +56,7 @@ public class AStar {
     return pathTaken;
   }
 
-  class HeuristicNode implements Comparator<HeuristicNode> {
+  static class HeuristicNode implements Comparator<HeuristicNode> {
     Node node;
     double weight;
 

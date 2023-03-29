@@ -1,6 +1,7 @@
 package edu.wpi.teamname;
 
 import java.sql.*;
+import java.util.Scanner;
 
 public class Sdb {
   private static final String url = "jdbc:postgresql://database.cs.wpi.edu:5432/teamsdb";
@@ -21,6 +22,45 @@ public class Sdb {
       }
       System.out.println("Opened database successfully");
     }
+
+    Scanner sc = new Scanner(System.in);
+    UserInputChoices uic = new UserInputChoices();
+    while (true) {
+
+        int choice = sc.nextInt();
+
+        switch (choice) {
+          case 1:
+            uic.displayNodeInformation();
+            break;
+          case 2:
+            uic.displayEdgeInformation();
+            break;
+          case 3:
+            uic.updateNodeCoordinates();
+            break;
+          case 4:
+            uic.updateNameOfLocationNode();
+            break;
+          case 5:
+            uic.exportNodeTableIntoCSV();
+            break;
+          case 6:
+            uic.importFromCSVIntoNodeTable();
+            break;
+          case 7:
+            uic.help();
+            break;
+          case 0:
+            System.exit(0);
+            break;
+          default:
+            break;
+
+        }
+    }
+
+
     // App.launch(App.class, args);
   }
 
