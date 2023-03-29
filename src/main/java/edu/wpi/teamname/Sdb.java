@@ -35,6 +35,6 @@ public class Sdb {
       edgeDatabase.addEdge(thisEdge);
     }
 
-    mapDatabase.updateNodeLoc("CLABS002L1", "White House");
+    // mapDatabase.updateNodeLoc("CLABS002L1", "White House");
   }
 }
