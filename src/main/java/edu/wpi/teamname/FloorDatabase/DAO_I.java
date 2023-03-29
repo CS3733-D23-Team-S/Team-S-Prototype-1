@@ -1,11 +1,10 @@
 package edu.wpi.teamname.FloorDatabase;
 
-import java.sql.Connection;
 import java.sql.SQLException;
 
 public interface DAO_I {
 
-  Connection establishConnection();
+  void establishConnection();
 
   void initTables() throws SQLException;
 
