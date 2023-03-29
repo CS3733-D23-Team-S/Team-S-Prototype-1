@@ -22,13 +22,12 @@ public class Edge {
 
   @Override
   public String toString() {
-    return "Edge{"
+    return "Edge:"
         + "startNode="
         + startNode.getNodeID()
         + ", endNode="
         + endNode.getNodeID()
         + ", edgeID='"
-        + edgeID
-        + '}';
+        + edgeID;
   }
 }

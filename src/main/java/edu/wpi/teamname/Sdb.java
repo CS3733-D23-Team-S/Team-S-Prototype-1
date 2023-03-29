@@ -18,15 +18,15 @@ public class Sdb {
     String edgePath = "src/main/java/edu/wpi/teamname/L1Edges.csv";
     System.out.println(
         "Please enter the path to the CSV that contains the information for the nodes."
-            + "\nIf you have no path to specify, then please press 1 and the program will use a preloaded database:");
+            + "\nIf you have no path to specify, then please press any key and the program will use a preloaded database:");
     String temp = sc.nextLine();
-    if (!temp.equals("1")) floorPath = temp;
+    if (temp.contains(".cvs")) floorPath = temp;
 
     System.out.println(
         "Please enter the path to the CSV that contains the information for the edges. "
-            + "\nIf you have no path to specify, then please press 1 and the program will use a preloaded databased:");
+            + "\nIf you have no path to specify, then please press any key and the program will use a preloaded databased:");
     temp = sc.nextLine();
-    if (!temp.equals("1")) edgePath = temp;
+    if (temp.contains(".cvs")) edgePath = temp;
 
     csvConverter converter = new csvConverter();
     converter.csvToNode(floorPath);
@@ -75,16 +75,19 @@ public class Sdb {
           choice = sc.nextLine();
           switch (choice) {
             case "node":
+              System.out.print("NodeID: ");
               choice = sc.nextLine();
               dbManager.retrieveNodeRow(choice);
               break;
             case "edge":
+              System.out.print("NodeID: ");
               choice = sc.nextLine();
               dbManager.retrieveEdgeInformation(choice);
               break;
             default:
               break;
           }
+          break;
         case "update":
           {
             System.out.println(
@@ -95,7 +98,9 @@ public class Sdb {
             String id = sc.nextLine();
             switch (choice) {
               case "location":
+                System.out.print("X Coordinate: ");
                 int xcoord = sc.nextInt();
+                System.out.print("Y Coordinate: ");
                 int ycoord = sc.nextInt();
                 dbManager.updateCoord(id, xcoord, ycoord);
                 break;
@@ -106,6 +111,8 @@ public class Sdb {
               default:
                 break;
             }
+
+            break;
           }
         case "reset":
           {
