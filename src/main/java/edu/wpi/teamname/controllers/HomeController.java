@@ -1,5 +1,7 @@
 package edu.wpi.teamname.controllers;
 
+import static edu.wpi.teamname.navigation.Screen.PATHFINDING;
+
 import edu.wpi.teamname.navigation.Navigation;
 import edu.wpi.teamname.navigation.Screen;
 import io.github.palexdev.materialfx.controls.MFXButton;
@@ -21,6 +23,8 @@ public class HomeController {
 
   @FXML MFXButton helpButton;
 
+  @FXML MFXButton homeToPathfindingButton;
+
   @FXML
   public void initialize() {
     // Adding the menu option to exit application
@@ -29,6 +33,7 @@ public class HomeController {
     reserveRoomButton.setOnMouseClicked(event -> goToRoomPage());
     signageButton.setOnMouseClicked(event -> goToSignagePage());
     exitOption.setOnAction(event -> exitApplication());
+    homeToPathfindingButton.setOnMouseClicked(event -> Navigation.navigate(PATHFINDING));
 
     // event handler for exiting application
 
