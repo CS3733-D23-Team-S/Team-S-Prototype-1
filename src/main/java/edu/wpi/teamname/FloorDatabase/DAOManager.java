@@ -1,12 +1,14 @@
 package edu.wpi.teamname.FloorDatabase;
 
-import java.sql.*;
+import lombok.Getter;
+
+import java.io.*;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.HashMap;
 import java.util.HashSet;
-
-import lombok.Getter;
 
 public class DAOManager extends DAOImpl implements DAO_I {
 
@@ -258,6 +260,96 @@ public class DAOManager extends DAOImpl implements DAO_I {
 		for (String key : edges.keySet()) {
 			System.out.print(key + "\t");
 			System.out.println(edges.get(key).toString());
+		}
+	}
+
+	public void csvExporterNode(String csvFilePath) throws IOException {
+		csvFilePath = "expNodes.csv";
+		PrintWriter writer = new PrintWriter(csvFilePath);
+		writer.print("");
+		writer.close();
+
+		try {
+			String sql = "SELECT * FROM hospitaldb.nodes";
+
+			Statement statement = c.createStatement();
+
+			ResultSet result = statement.executeQuery(sql);
+
+			BufferedWriter fileWriter = new BufferedWriter(new FileWriter(csvFilePath));
+
+			fileWriter.write("nodeID,xcoord,ycoord,floor,building,nodetype,longname,shortname");
+
+			while (result.next()) {
+				String nodeid = result.getString("nodeid");
+				int xcoord = result.getInt("xcoord");
+				int ycoord = result.getInt("ycoord");
+				int floor = result.getInt("floor");
+				String building = result.getString("building");
+				int nodetype = result.getInt("nodetype");
+				String longname = result.getString("longname");
+				String shortname = result.getString("shortname");
+
+				String line = String.format("%s,%d,%d,%d,%s,%d,%s,%s",
+						nodeid, xcoord, ycoord, floor, building, nodetype, longname, shortname);
+
+				fileWriter.newLine();
+				fileWriter.write(line);
+			}
+
+			statement.close();
+			fileWriter.close();
+
+		} catch (SQLException e) {
+			System.out.println("Database error:");
+			e.printStackTrace();
+		} catch (IOException e) {
+			System.out.println("File IO error:");
+			e.printStackTrace();
+		}
+	}
+
+	public void csvExporterEdges(String csvFilePath) throws FileNotFoundException {
+		{
+			csvFilePath = "expEdges.csv";
+			PrintWriter writer = new PrintWriter(csvFilePath);
+			writer.print("");
+			writer.close();
+
+			try {
+				String sql = "SELECT * FROM hospitaldb.edges";
+
+				Statement statement = c.createStatement();
+
+				ResultSet result = statement.executeQuery(sql);
+
+				BufferedWriter fileWriter = new BufferedWriter(new FileWriter(csvFilePath));
+
+				fileWriter.write("startnode,endnode,edgeid");
+
+				while (result.next()) {
+					int startnode = result.getInt("startnode");
+					int endnode = result.getInt("endnode");
+					String edgeid = result.getString("edgeid");
+
+
+					String line = String.format("%d,%d,%s",
+							startnode, endnode, edgeid);
+
+					fileWriter.newLine();
+					fileWriter.write(line);
+				}
+
+				statement.close();
+				fileWriter.close();
+
+			} catch (SQLException e) {
+				System.out.println("Database error:");
+				e.printStackTrace();
+			} catch (IOException e) {
+				System.out.println("File IO error:");
+				e.printStackTrace();
+			}
 		}
 	}
 }
