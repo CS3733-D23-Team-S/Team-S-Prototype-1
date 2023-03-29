@@ -21,7 +21,7 @@ public class BFS {
     edges = dbManager.getNeighbors();
   }
 
-  public final List<Node> findPath(String s, String e) {
+  public final ArrayList<String> findPath(String s, String e) {
     updateDataBase();
     Node currentNode = dbManager.getNodes().get(s);
     Node end = dbManager.getNodes().get(e);
@@ -32,9 +32,7 @@ public class BFS {
     while (nodesYetToSearch.size() != 0) {
       currentNode = nodesYetToSearch.poll();
       if (currentNode == end) {
-        if (!visitedNodes.contains(currentNode)) {
-          return constructShortestPath(currentNode, gotHereFrom);
-        }
+        return constructShortestPath(currentNode, gotHereFrom);
       }
       for (String nodeToSearchID : edges.get(currentNode.getNodeID())) {
         Node nodeToSearch = floors.get(nodeToSearchID);
@@ -49,13 +47,13 @@ public class BFS {
     return null;
   }
 
-  private List<Node> constructShortestPath(Node currentNode, Map<Node, Node> gotHereFrom) {
-    final List<Node> pathTaken = new LinkedList<>();
+  private ArrayList<String> constructShortestPath(Node currentNode, Map<Node, Node> gotHereFrom) {
+    final ArrayList<String> pathTaken = new ArrayList<>();
     while (gotHereFrom.get(currentNode) != null) {
-      pathTaken.add(currentNode);
+      pathTaken.add(currentNode.getNodeID());
       currentNode = gotHereFrom.get(currentNode);
     }
-    pathTaken.add(currentNode);
+    pathTaken.add(currentNode.getNodeID());
     Collections.reverse(pathTaken);
     return pathTaken;
   }
