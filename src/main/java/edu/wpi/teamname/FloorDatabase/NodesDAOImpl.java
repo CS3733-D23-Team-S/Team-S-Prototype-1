@@ -16,7 +16,7 @@ public class NodesDAOImpl extends DAOImpl implements DAO_I {
     super.c = c;
   }
 
-  public void updateNodeLoc(String nodeId, String longName) {
+  public void updateLocationName(String nodeId, String longName) {
     try {
       PreparedStatement preparedStatement =
           c.prepareStatement("UPDATE hospitaldb.nodes SET longname = ? WHERE nodeID = ?");
@@ -31,6 +31,23 @@ public class NodesDAOImpl extends DAOImpl implements DAO_I {
       // Handle the exception appropriately
     }
     // Handles the edge updates as well
+  }
+
+  public void updateCoord(String nodeId, int xcoord, int ycoord) {
+    try {
+      PreparedStatement preparedStatement =
+          c.prepareStatement("UPDATE hospitaldb.nodes SET xcoord = ?, ycoord = ? WHERE nodeID = ?");
+
+      preparedStatement.setInt(1, xcoord);
+      preparedStatement.setInt(2, ycoord);
+      preparedStatement.setString(3, nodeId);
+
+      preparedStatement.executeUpdate();
+      System.out.println("Updated Coordinates");
+    } catch (SQLException e) {
+      e.printStackTrace();
+      // Handle the exception appropriately
+    }
   }
 
   public List<Node> getAllNodes() {
