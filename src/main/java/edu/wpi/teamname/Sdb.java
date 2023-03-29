@@ -1,7 +1,6 @@
 package edu.wpi.teamname;
 
 import edu.wpi.teamname.FloorDatabase.*;
-import java.sql.Connection;
 import java.sql.SQLException;
 
 public class Sdb {
@@ -14,29 +13,28 @@ public class Sdb {
       System.out.println(thisEdge.toString());
     }
 
-    DAOImpl dbManager = new DAOImpl();
-
+    DAOManager dbManager = new DAOManager();
     // Establish connection to database
-    Connection connection = dbManager.establishConnection();
+    dbManager.establishConnection();
 
     // Create Empty Table
     dbManager.initTables();
 
-    NodesDAOImpl mapDatabase = new NodesDAOImpl(connection);
-    EdgesDAOImpl edgeDatabase = new EdgesDAOImpl(connection);
-
     // Inputing Nodes into Data base
     for (Node thisNode : converter.getNodes().values()) {
-      mapDatabase.addNode(thisNode);
+      dbManager.addNode(thisNode);
     }
 
     // Inputting Edges into Database
     for (Edge thisEdge : converter.getEdges()) {
-      edgeDatabase.addEdge(thisEdge);
+      dbManager.addEdge(thisEdge);
     }
-
-    mapDatabase.updateLocationName("CLABS002L1", "White House");
-    mapDatabase.updateCoord("CLABS002L1", 200, 300);
+    dbManager.constructLocalDataBase();
+    dbManager.printLocalDatabases();
+    dbManager.updateLocationName("CLABS002L1", "White House");
+    dbManager.updateCoord("CLABS002L1", 200, 300);
+    dbManager.deleteNode("CSERV001L2");
+    dbManager.printLocalDatabases();
   }
 
   public static void help() {
