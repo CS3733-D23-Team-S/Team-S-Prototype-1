@@ -57,7 +57,11 @@
                   <Font size="24.0" />
                </font>
             </MFXButton>
-            <MFXButton fx:id="homeToPathfinding" layoutX="218.0" layoutY="201.0" />
+            <MFXButton fx:id="homeToPathfindingButton" layoutX="595.0" layoutY="242.0" prefHeight="75.0" prefWidth="431.0" text="Pathfinding">
+               <font>
+                  <Font size="36.0" />
+               </font>
+            </MFXButton>
          </children>
       </AnchorPane>
    </center>

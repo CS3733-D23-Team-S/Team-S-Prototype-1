@@ -23,7 +23,7 @@ public class HomeController {
 
   @FXML MFXButton helpButton;
 
-  @FXML MFXButton homeToPathfinding;
+  @FXML MFXButton homeToPathfindingButton;
 
   @FXML
   public void initialize() {
@@ -33,7 +33,7 @@ public class HomeController {
     reserveRoomButton.setOnMouseClicked(event -> goToRoomPage());
     signageButton.setOnMouseClicked(event -> goToSignagePage());
     exitOption.setOnAction(event -> exitApplication());
-    homeToPathfinding.setOnMouseClicked(event -> Navigation.navigate(PATHFINDING));
+    homeToPathfindingButton.setOnMouseClicked(event -> Navigation.navigate(PATHFINDING));
 
     // event handler for exiting application
 
