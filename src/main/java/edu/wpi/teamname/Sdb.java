@@ -6,6 +6,7 @@ import java.sql.SQLException;
 
 public class Sdb {
   public static void main(String[] args) throws SQLException {
+
     csvConverter converter = new csvConverter();
     converter.csvToNode("src/main/java/edu/wpi/teamname/L1Nodes.csv");
     converter.csvToEdges("src/main/java/edu/wpi/teamname/L1Edges.csv");
@@ -44,9 +45,10 @@ public class Sdb {
     System.out.println("1. To Display node information press 1, then enter the nodeID");
     System.out.println("2. To Display edge information press 2, then enter the edgeID");
     System.out.println("3. To Update a  node's long name press 3, then enter target node, then enter new name");
-    System.out.println("4. To Import from CSV, press 4 then enter file location");
-    System.out.println("5. To Export to CSV, press 5. You'll receive location of your CSV file");
-    System.out.println("6. To exit, press 7");
+
+    System.out.println("4. To Delete a Node, press 5 then enter node name");
+    System.out.println("5. To Export to CSV, press 6. You'll receive location of your CSV file");
+    System.out.println("7. To exit, press 0");
 
 
 

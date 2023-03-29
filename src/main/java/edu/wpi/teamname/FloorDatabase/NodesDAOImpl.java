@@ -1,11 +1,12 @@
 package edu.wpi.teamname.FloorDatabase;
 
+import lombok.Getter;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.HashSet;
 import java.util.List;
-import lombok.Getter;
 
 public class NodesDAOImpl extends DAOImpl implements DAO_I {
 
@@ -36,7 +37,7 @@ public class NodesDAOImpl extends DAOImpl implements DAO_I {
   public void updateCoord(String nodeId, int xcoord, int ycoord) {
     try {
       PreparedStatement preparedStatement =
-          c.prepareStatement("UPDATE hospitaldb.nodes SET xcoord = ?, ycoord = ? WHERE nodeID = ?");
+          c.prepareStatement("UPDATE hospitaldb.nodes SET xcoord = ?, ycoord = ? WHERE nodeID  = ?");
 
       preparedStatement.setInt(1, xcoord);
       preparedStatement.setInt(2, ycoord);
