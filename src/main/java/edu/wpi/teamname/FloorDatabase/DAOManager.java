@@ -254,10 +254,6 @@ public class DAOManager extends DAOImpl implements DAO_I {
   }
 
   public void csvExporterNode(String csvFilePath) throws IOException {
-    csvFilePath = "src/expNodes.csv";
-    PrintWriter writer = new PrintWriter(csvFilePath);
-    writer.print("");
-    writer.close();
 
     try {
       String sql = "SELECT * FROM hospitaldb.nodes";
@@ -303,10 +299,8 @@ public class DAOManager extends DAOImpl implements DAO_I {
 
   public void csvExporterEdges(String csvFilePath) throws FileNotFoundException {
     {
-      csvFilePath = "src/expEdges.csv";
       PrintWriter writer = new PrintWriter(csvFilePath);
       writer.print("");
-      writer.close();
 
       try {
         String sql = "SELECT * FROM hospitaldb.edges";
@@ -320,11 +314,11 @@ public class DAOManager extends DAOImpl implements DAO_I {
         fileWriter.write("startnode,endnode,edgeid");
 
         while (result.next()) {
-          int startnode = result.getInt("startnode");
-          int endnode = result.getInt("endnode");
+          String startnode = result.getString("startnode");
+          String endnode = result.getString("endnode");
           String edgeid = result.getString("edgeid");
 
-          String line = String.format("%d,%d,%s", startnode, endnode, edgeid);
+          String line = String.format("%s,%s,%s", startnode, endnode, edgeid);
 
           fileWriter.newLine();
           fileWriter.write(line);

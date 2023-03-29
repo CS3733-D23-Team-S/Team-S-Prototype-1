@@ -1,10 +1,11 @@
 package edu.wpi.teamname;
 
 import edu.wpi.teamname.FloorDatabase.*;
+import java.io.IOException;
 import java.sql.SQLException;
 
 public class Sdb {
-  public static void main(String[] args) throws SQLException {
+  public static void main(String[] args) throws SQLException, IOException {
     csvConverter converter = new csvConverter();
     converter.csvToNode("src/main/java/edu/wpi/teamname/L1Nodes.csv");
     converter.csvToEdges("src/main/java/edu/wpi/teamname/L1Edges.csv");
@@ -35,6 +36,8 @@ public class Sdb {
     dbManager.updateCoord("CLABS002L1", 200, 300);
     dbManager.retrieveRow("CLABS002L1");
     dbManager.deleteNode("CSERV001L2");
+    dbManager.csvExporterNode("src/main/java/edu/wpi/teamname/expNodes.csv");
+    dbManager.csvExporterEdges("src/main/java/edu/wpi/teamname/expEdges.csv");
 
     //    dbManager.printLocalDatabases();
   }
