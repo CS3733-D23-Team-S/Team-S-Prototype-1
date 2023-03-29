@@ -35,6 +35,11 @@ public class Sdb {
       edgeDatabase.addEdge(thisEdge);
     }
 
-    // mapDatabase.updateNodeLoc("CLABS002L1", "White House");
+    //Test Update Node
+    //mapDatabase.updateNodeLoc("CLABS002L1", "White House");
+
+    //Test Delete Node ()
+    String nodeID = "CLABS002L1";
+    //mapDatabase.deleteNode(converter.getNodes().get(nodeID));
   }
 }

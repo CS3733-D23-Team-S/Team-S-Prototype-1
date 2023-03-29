@@ -52,10 +52,10 @@ public class DAOImpl {
             + "edgeID Varchar(100),"
             + "foreign key (startNode) references "
             + floorNodeTableName
-            + "(nodeID),"
+            + "(nodeID) ON DELETE CASCADE,"
             + "foreign key (endNode) references "
             + floorNodeTableName
-            + "(nodeID))";
+            + "(nodeID) ON DELETE CASCADE)";
     try {
 
       stmt.execute(createSchema);

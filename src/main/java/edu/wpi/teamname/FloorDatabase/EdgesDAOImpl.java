@@ -26,7 +26,20 @@ public class EdgesDAOImpl extends DAOImpl implements DAO_I {
     return null;
   }
 
-  public void deleteEdge(Node target) {}
+  public void deleteEdge(Edge target) {
+    /*
+    String edgeID = target.getEdgeID();
+    try {
+      PreparedStatement prepstat =
+          c.prepareStatement("DELETE FROM hospitaldb.nodes WHERE nodeid = ?");
+
+      prepstat.setString(1, edgeID);
+
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+    */
+  }
 
   public void addEdge(Edge thisEdge) {
     try {

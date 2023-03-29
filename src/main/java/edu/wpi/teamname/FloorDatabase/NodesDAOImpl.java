@@ -37,7 +37,26 @@ public class NodesDAOImpl extends DAOImpl implements DAO_I {
     return null;
   }
 
-  public void deleteNode(Node target) {}
+  //Deletes given node from database and from local Hash
+  public void deleteNode(Node target) {
+
+    String nodeID = target.getNodeID();
+    try {
+      PreparedStatement prepstat =
+          c.prepareStatement("DELETE FROM hospitaldb.nodes WHERE nodeid = ?");
+
+      prepstat.setString(1, nodeID);
+
+      //delete from database
+      prepstat.executeUpdate();
+
+      //delete from Hashmap
+      System.out.println("Node Deleted");
+
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+  }
 
   public void addNode(Node thisNode) {
     try {
