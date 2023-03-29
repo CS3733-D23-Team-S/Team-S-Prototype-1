@@ -18,7 +18,6 @@ public class HomePage extends Application {
 
     final Scene scene = new Scene(root);
     primaryStage.setScene(scene);
-    scene.setFill(Color.web("#003166"));
     primaryStage.setTitle("HomePage");
     primaryStage.show();
   }
