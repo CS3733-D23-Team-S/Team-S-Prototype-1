@@ -40,6 +40,7 @@ public class DAOImpl {
 						+ "yCoord int,"
 						+ "Floor int,"
 						+ "Building Varchar(100),"
+						+ "nodeType int,"
 						+ "longName Varchar(100),"
 						+ "shortName Varchar(100),"
 						+ " CONSTRAINT UNIQUE (nodeID))";
