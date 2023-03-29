@@ -21,42 +21,39 @@ public class AStar {
     edges = dbManager.getNeighbors();
   }
 
-  public List<String> findPath(String s, String e) {
+  public ArrayList<String> findPath(String s, String e) {
     updateDataBase();
+    final PriorityQueue<HeuristicNode> nodesYetToSearch =
+        new PriorityQueue<>(10, new HeuristicNode(null, Double.MAX_VALUE));
+    final HashSet<Node> visitedNodes = new HashSet<>();
+    final Map<Node, Node> gotHereFrom = new HashMap<>();
     Node start = dbManager.getNodes().get(s);
     Node end = dbManager.getNodes().get(e);
-
     HeuristicNode startHNode = new HeuristicNode(start, calculateWeight(start, end));
-    final PriorityQueue<HeuristicNode> nodesYetToSearch = new PriorityQueue<>();
-    final HashSet<Node> visitedNodes = new HashSet<>();
-    final Map<Node, HeuristicNode> gotHereFrom = new HashMap<>();
+    //    System.out.println(startHNode.node + "\t" + startHNode.weight);
     nodesYetToSearch.add(startHNode);
     HeuristicNode currentNode;
 
     while (nodesYetToSearch.size() != 0) {
       currentNode = nodesYetToSearch.poll();
       if (currentNode.node == end) {
-        if (!visitedNodes.contains(currentNode.node)) {
-          return constructShortestPath(currentNode.node, gotHereFrom);
-        }
+        return constructShortestPath(currentNode.node, gotHereFrom);
       }
-      for (String nodeToSearchID : getNeighbors(currentNode.node)) {
+      //      dbManager.printLocalDatabases();
+      for (String nodeToSearchID : edges.get(currentNode.node.getNodeID())) {
+        //        System.out.println(nodeToSearchID);
+        //        System.out.println(edges.get(nodeToSearchID).toString());
         Node nodeToSearch = floors.get(nodeToSearchID);
         if (!visitedNodes.contains(nodeToSearch)) {
+          visitedNodes.add(currentNode.node);
           double weight = calculateWeight(nodeToSearch, end);
-
           nodesYetToSearch.add(new HeuristicNode(nodeToSearch, weight));
-          gotHereFrom.put(nodeToSearch, currentNode);
+          gotHereFrom.put(nodeToSearch, currentNode.node);
         }
       }
       visitedNodes.add(currentNode.node);
     }
-
     return null;
-  }
-
-  private HashSet<String> getNeighbors(Node node) {
-    return edges.get(node.getNodeID());
   }
 
   private double calculateWeight(Node start, Node target) {
@@ -65,12 +62,11 @@ public class AStar {
             + Math.pow((start.getYCoord() - target.getYCoord()), 2));
   }
 
-  private List<String> constructShortestPath(
-      Node currentNode, Map<Node, HeuristicNode> gotHereFrom) {
-    final List<String> pathTaken = new LinkedList<>();
+  private ArrayList<String> constructShortestPath(Node currentNode, Map<Node, Node> gotHereFrom) {
+    final ArrayList<String> pathTaken = new ArrayList<>();
     while (gotHereFrom.get(currentNode) != null) {
       pathTaken.add(currentNode.getNodeID());
-      currentNode = gotHereFrom.get(currentNode).node;
+      currentNode = gotHereFrom.get(currentNode);
     }
     pathTaken.add(currentNode.getNodeID());
     Collections.reverse(pathTaken);

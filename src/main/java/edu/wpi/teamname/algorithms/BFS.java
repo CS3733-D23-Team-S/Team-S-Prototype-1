@@ -28,7 +28,6 @@ public class BFS {
     final Queue<Node> nodesYetToSearch = new LinkedList<>();
     final HashSet<Node> visitedNodes = new HashSet<>();
     final Map<Node, Node> gotHereFrom = new HashMap<>();
-
     nodesYetToSearch.add(currentNode);
     while (nodesYetToSearch.size() != 0) {
       currentNode = nodesYetToSearch.poll();
@@ -37,7 +36,7 @@ public class BFS {
           return constructShortestPath(currentNode, gotHereFrom);
         }
       }
-      for (String nodeToSearchID : getNeighbors(currentNode)) {
+      for (String nodeToSearchID : edges.get(currentNode.getNodeID())) {
         Node nodeToSearch = floors.get(nodeToSearchID);
         if (!visitedNodes.contains(nodeToSearch)) {
           nodesYetToSearch.add(nodeToSearch);
@@ -48,10 +47,6 @@ public class BFS {
     }
     // If target is never found:
     return null;
-  }
-
-  private HashSet<String> getNeighbors(Node node) {
-    return edges.get(node.getNodeID());
   }
 
   private List<Node> constructShortestPath(Node currentNode, Map<Node, Node> gotHereFrom) {
