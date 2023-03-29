@@ -1,73 +1,93 @@
 package edu.wpi.teamname.algorithms;
 
 import edu.wpi.teamname.FloorDatabase.Node;
-import edu.wpi.teamname.controllers.DataBaseController;
+import edu.wpi.teamname.FloorDatabase.DAOManager;
+
 import java.util.*;
 
 public class AStar {
-  DataBaseController dataBase = new DataBaseController();
 
-  public AStar() {};
+	DAOManager dbManager;
+	HashMap<String, Node> floors;
+	HashMap<String, HashSet<String>> edges;
 
-  public List<Node> findPath(Node start, Node end) {
-    HeuristicNode startHNode = new HeuristicNode(start, calculateWeight(start, end));
-    final PriorityQueue<HeuristicNode> nodesYetToSearch = new PriorityQueue<>();
-    final Map<HeuristicNode, Boolean> visitedNodes = new HashMap<>();
-    final Map<Node, HeuristicNode> gotHereFrom = new HashMap<>();
+	public AStar(DAOManager manager) {
+		dbManager = manager;
+		floors = dbManager.getNodes();
+		edges = dbManager.getEdges();
+	}
 
-    nodesYetToSearch.add(startHNode);
-    // Node currentNode = start;
-    HeuristicNode currentNode;
 
-    while (nodesYetToSearch.size() != 0) {
-      currentNode = nodesYetToSearch.poll();
+	private void updateDataBase() {
+		floors = dbManager.getNodes();
+		edges = dbManager.getEdges();
+	}
 
-      for (Node nodeToSearch : dataBase.getNeighbors(currentNode.node)) {
+	public List<String> findPath(Node start, Node end) {
+      updateDataBase();
+		HeuristicNode startHNode = new HeuristicNode(start, calculateWeight(start, end));
+		final PriorityQueue<HeuristicNode> nodesYetToSearch = new PriorityQueue<>();
+		final HashSet<Node> visitedNodes = new HashSet<>();
+		final Map<Node, HeuristicNode> gotHereFrom = new HashMap<>();
 
-        if (!visitedNodes.containsKey(nodeToSearch)) {
-          double weight = calculateWeight(nodeToSearch, end);
+		nodesYetToSearch.add(startHNode);
+		HeuristicNode currentNode;
 
-          nodesYetToSearch.add(new HeuristicNode(nodeToSearch, weight));
-          gotHereFrom.put(nodeToSearch, currentNode);
-        }
-      }
-      visitedNodes.put(currentNode, true);
+		while (nodesYetToSearch.size() != 0) {
+			currentNode = nodesYetToSearch.poll();
+          if (currentNode.node == end) {
+            if (!visitedNodes.contains(currentNode.node)) {
+              return constructShortestPath(currentNode.node, gotHereFrom);
+            }
+          }
+			for (String nodeToSearchID : getNeighbors(currentNode.node)) {
+                Node nodeToSearch = floors.get(nodeToSearchID);
+				if (!visitedNodes.contains(nodeToSearch)) {
+					double weight = calculateWeight(nodeToSearch, end);
+
+					nodesYetToSearch.add(new HeuristicNode(nodeToSearch, weight));
+					gotHereFrom.put(nodeToSearch, currentNode);
+				}
+			}
+			visitedNodes.add(currentNode.node);
+		}
+
+		return null;
+	}
+
+    private HashSet<String> getNeighbors(Node node){
+      return edges.get(node.getNodeID());
     }
 
-    return null;
-  }
+	private double calculateWeight(Node start, Node target) {
+		return Math.sqrt(
+                Math.pow((start.getXCoord() - target.getXCoord()), 2) +
+								Math.pow((start.getYCoord() - target.getYCoord()), 2));
+	}
 
-  private double calculateWeight(Node start, Node target) {
-    double weight =
-        Math.sqrt(
-            Math.pow((start.getXCoord() - target.getXCoord()), 2) +
-            Math.pow((start.getYCoord() - target.getYCoord()), 2));
-    return weight;
-  }
+	private List<String> constructShortestPath(Node currentNode, Map<Node, HeuristicNode> gotHereFrom) {
+		final List<String> pathTaken = new LinkedList<>();
+		while (gotHereFrom.get(currentNode) != null) {
+			pathTaken.add(currentNode.getNodeID());
+			currentNode = gotHereFrom.get(currentNode).node;
+		}
+		pathTaken.add(currentNode.getNodeID());
+		Collections.reverse(pathTaken);
+		return pathTaken;
+	}
 
-  private List<Node> constructShortestPath(Node currentNode, Map<Node, Node> gotHereFrom) {
-    final List<Node> pathTaken = new LinkedList<Node>();
-    while (gotHereFrom.get(currentNode) != null) {
-      pathTaken.add(currentNode);
-      currentNode = gotHereFrom.get(currentNode);
-    }
-    pathTaken.add(currentNode);
-    Collections.reverse(pathTaken);
-    return pathTaken;
-  }
+	static class HeuristicNode implements Comparator<HeuristicNode> {
+		Node node;
+		double weight;
 
-  static class HeuristicNode implements Comparator<HeuristicNode> {
-    Node node;
-    double weight;
+		public HeuristicNode(Node node, double weight) {
+			this.node = node;
+			this.weight = weight;
+		}
 
-    public HeuristicNode(Node node, double weight) {
-      this.node = node;
-      this.weight = weight;
-    }
-
-    @Override
-    public int compare(HeuristicNode o1, HeuristicNode o2) {
-      return Double.compare(o1.weight, o2.weight);
-    }
-  }
+		@Override
+		public int compare(HeuristicNode o1, HeuristicNode o2) {
+			return Double.compare(o1.weight, o2.weight);
+		}
+	}
 }
