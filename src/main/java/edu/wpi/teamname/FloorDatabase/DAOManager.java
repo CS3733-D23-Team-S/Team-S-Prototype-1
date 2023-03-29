@@ -9,18 +9,20 @@ import lombok.Getter;
 
 public class DAOManager extends DAOImpl implements DAO_I {
 
-  @Getter private HashMap<String, HashSet<String>> edges;
+  @Getter private HashMap<String, HashSet<String>> neighbors;
   @Getter private HashMap<String, Node> nodes;
 
   public DAOManager() {
-    edges = new HashMap<>();
+    neighbors = new HashMap<>();
     nodes = new HashMap<>();
   }
 
   @Override
   public void constructLocalDataBase() throws SQLException {
+    if (!nodes.isEmpty()) nodes.clear();
+    if (!neighbors.isEmpty()) neighbors.clear();
     constructLocalFloorDataBase();
-    constructLocalEdgeDataBase();
+    constructLocalNeighborsDB();
   }
 
   public void addNode(Node thisNode) {
@@ -40,6 +42,7 @@ public class DAOManager extends DAOImpl implements DAO_I {
       preparedStatement.setString(7, thisNode.getLongName());
       preparedStatement.setString(8, thisNode.getShortName());
       preparedStatement.executeUpdate();
+
     } catch (SQLException e) {
       e.printStackTrace();
       System.out.println(e.getSQLState());
@@ -64,6 +67,8 @@ public class DAOManager extends DAOImpl implements DAO_I {
     }
   }
 
+  // Left if desired to use, but technically the above method will be faster and not rely on the
+  // remote
   public void updateLocationName(String nodeId, String longName) {
     try {
       PreparedStatement preparedStatement =
@@ -119,17 +124,21 @@ public class DAOManager extends DAOImpl implements DAO_I {
       deleteNode.setString(1, target);
       deleteNode.execute();
       nodes.remove(target);
-      edges.remove(target);
-      for (String key : edges.keySet()) {
-        edges.get(key).remove(target);
-        if (edges.get(key).isEmpty()) edges.remove(key);
-      }
+      neighbors.remove(target);
 
+      for (String key : neighbors.keySet()) {
+        neighbors.get(key).remove(target);
+        if (neighbors.get(key).isEmpty()) neighbors.remove(key);
+      }
     } catch (SQLException e) {
       e.printStackTrace();
       System.out.println(e.getSQLState());
     }
   }
+
+  //	private void addNodeToFloorDB(Node node) {
+  //		nodes.put(node.getNodeID(), node);
+  //	}
 
   private void constructLocalFloorDataBase() throws SQLException {
     Statement stmt = c.createStatement();
@@ -164,7 +173,7 @@ public class DAOManager extends DAOImpl implements DAO_I {
     }
   }
 
-  private void constructLocalEdgeDataBase() throws SQLException {
+  private void constructLocalNeighborsDB() throws SQLException {
     Statement stmt = c.createStatement();
     String getNodes = "SELECT nodeID FROM " + floorNodeTableName;
     PreparedStatement getNeighbors =
@@ -181,30 +190,29 @@ public class DAOManager extends DAOImpl implements DAO_I {
         while (data.next()) {
           neighbors.add(data.getString("endNode"));
         }
-        edges.put(currentNode, neighbors);
+        this.neighbors.put(currentNode, neighbors);
       }
     } catch (SQLException e) {
       System.out.println("Error accessing the remote and constructing the list of edges");
     }
   }
 
-  public void retrieveRow(String target) throws SQLException {
-    PreparedStatement statement =
-        c.prepareStatement("SELECT nodeID FROM " + floorNodeTableName + " WHERE nodeID = ?");
-    try {
-      statement.setString(1, target);
-      ResultSet data = statement.executeQuery();
-      data.next();
-      String nodeID = data.getString("nodeID");
-      if (nodes.get(nodeID) == null) {
-        System.out.println("This node is not in the database, so its row cannot be printed");
-        return;
-      }
-      System.out.println(nodes.get(nodeID).toString());
+  public void retrieveNodeRow(String target) {
+    if (nodes.get(target) == null) {
+      System.out.println("This node is not in the database, so its row cannot be printed");
+      return;
+    }
+    System.out.println(nodes.get(target).toString());
+  }
 
-    } catch (SQLException e) {
-      e.printStackTrace();
-      System.out.println(e.getSQLState());
+  public void retrieveEdgeInformation(String target) {
+    if (neighbors.get(target) == null) {
+      System.out.println("This node is not in the database, so its row cannot be printed");
+      return;
+    }
+    System.out.println("From this starting node, the following edges exist:");
+    for (String name : neighbors.get(target)) {
+      System.out.println(target + "_" + name);
     }
   }
 
@@ -212,9 +220,9 @@ public class DAOManager extends DAOImpl implements DAO_I {
     for (String key : nodes.keySet()) {
       System.out.println(nodes.get(key).toString());
     }
-    for (String key : edges.keySet()) {
+    for (String key : neighbors.keySet()) {
       System.out.print(key + "\t");
-      System.out.println(edges.get(key).toString());
+      System.out.println(neighbors.get(key).toString());
     }
   }
 }

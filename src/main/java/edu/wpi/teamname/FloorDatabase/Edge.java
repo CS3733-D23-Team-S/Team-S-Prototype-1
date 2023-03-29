@@ -14,16 +14,21 @@ public class Edge {
     edgeID = sN.getNodeID() + "_" + eN.getNodeID();
   }
 
+  public void updateEdge(Node sN, Node eN) {
+    startNode = sN;
+    endNode = eN;
+    edgeID = sN.getNodeID() + "_" + eN.getNodeID();
+  }
+
   @Override
   public String toString() {
     return "Edge{"
         + "startNode="
-        + startNode
+        + startNode.getNodeID()
         + ", endNode="
-        + endNode
+        + endNode.getNodeID()
         + ", edgeID='"
         + edgeID
-        + '\''
         + '}';
   }
 }

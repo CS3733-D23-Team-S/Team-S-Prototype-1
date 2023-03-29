@@ -1,6 +1,7 @@
 package edu.wpi.teamname.algorithms;
 
-import edu.wpi.teamname.FloorDatabase.*;
+import edu.wpi.teamname.FloorDatabase.DAOManager;
+import edu.wpi.teamname.FloorDatabase.Node;
 import java.util.*;
 
 public class BFS {
@@ -12,17 +13,23 @@ public class BFS {
   public BFS(DAOManager manager) {
     dbManager = manager;
     floors = dbManager.getNodes();
-    edges = dbManager.getEdges();
+    edges = dbManager.getNeighbors();
   }
 
-  public final List<Node> findPath(Node start, Node end) {
+  private void updateDataBase() {
+    floors = dbManager.getNodes();
+    edges = dbManager.getNeighbors();
+  }
 
+  public final List<Node> findPath(String s, String e) {
+    updateDataBase();
+    Node currentNode = dbManager.getNodes().get(s);
+    Node end = dbManager.getNodes().get(e);
     final Queue<Node> nodesYetToSearch = new LinkedList<>();
     final HashSet<Node> visitedNodes = new HashSet<>();
     final Map<Node, Node> gotHereFrom = new HashMap<>();
 
-    nodesYetToSearch.add(start);
-    Node currentNode = start;
+    nodesYetToSearch.add(currentNode);
     while (nodesYetToSearch.size() != 0) {
       currentNode = nodesYetToSearch.poll();
       if (currentNode == end) {
@@ -42,9 +49,11 @@ public class BFS {
     // If target is never found:
     return null;
   }
-  private HashSet<String> getNeighbors(Node node){
+
+  private HashSet<String> getNeighbors(Node node) {
     return edges.get(node.getNodeID());
   }
+
   private List<Node> constructShortestPath(Node currentNode, Map<Node, Node> gotHereFrom) {
     final List<Node> pathTaken = new LinkedList<>();
     while (gotHereFrom.get(currentNode) != null) {
