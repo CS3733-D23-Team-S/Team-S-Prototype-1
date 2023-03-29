@@ -1,4 +1,3 @@
 package edu.wpi.teamname.FloorDatabase;
 
-public class Edge {
-}
+public class Edge {}
