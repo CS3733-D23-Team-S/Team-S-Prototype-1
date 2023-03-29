@@ -4,30 +4,28 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.List;
 
 public class DAOImpl {
-	private static final String url = "jdbc:postgresql://database.cs.wpi.edu:5432/teamsdb";
-	private static final String user = "teams";
-	private static final String password = "teams160";
-	protected static final String schemaName = "hospitaldb";
-	protected static final String floorNodeTableName = schemaName + "." + "floortable";
-	protected static final String edgesTableName = schemaName + "." + "edgestable";
-	Connection c;
+  private static final String url = "jdbc:postgresql://database.cs.wpi.edu:5432/teamsdb";
+  private static final String user = "teams";
+  private static final String password = "teams160";
+  protected static final String schemaName = "hospitaldb";
+  protected static final String floorNodeTableName = schemaName + "." + "nodes";
+  protected static final String edgesTableName = schemaName + "." + "edges";
+  Connection c;
 
-
-	public Connection establishConnection() {
-		try {
-			Class.forName("org.postgresql.Driver");
-			c = DriverManager.getConnection(url, user, password);
-		} catch (Exception e) {
-			e.printStackTrace();
-			System.err.println(e.getClass().getName() + ": " + e.getMessage());
-			System.exit(0);
-		}
-		System.out.println("Opened database successfully");
-		return c;
-	}
+  public Connection establishConnection() {
+    try {
+      Class.forName("org.postgresql.Driver");
+      c = DriverManager.getConnection(url, user, password);
+    } catch (Exception e) {
+      e.printStackTrace();
+      System.err.println(e.getClass().getName() + ": " + e.getMessage());
+      System.exit(0);
+    }
+    System.out.println("Opened database successfully");
+    return c;
+  }
 
 	public void initTables() throws SQLException {
 		Statement stmt = c.createStatement();

@@ -1,5 +1,10 @@
 package edu.wpi.teamname.FloorDatabase;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.HashSet;
+import java.util.List;
 import lombok.Getter;
 
 import java.sql.*;
@@ -16,16 +21,46 @@ public class NodesDAOImpl extends DAOImpl implements DAO_I {
 		super.c = c;
 	}
 
-	public void updateNode(Node target) {
-		//Handles the edge updates as well
-	}
+  public void updateLocationName(String nodeId, String longName) {
+    try {
+      PreparedStatement preparedStatement =
+          c.prepareStatement("UPDATE hospitaldb.nodes SET longname = ? WHERE nodeID = ?");
 
-	public List<Node> getAllNodes() {
-		return null;
-	}
+      preparedStatement.setString(1, longName);
+      preparedStatement.setString(2, nodeId);
 
-	public void deleteNode(Node target) {
-	}
+      preparedStatement.executeUpdate();
+      System.out.println("Updated Node");
+    } catch (SQLException e) {
+      e.printStackTrace();
+      // Handle the exception appropriately
+    }
+    // Handles the edge updates as well
+  }
+
+  public void updateCoord(String nodeId, int xcoord, int ycoord) {
+    try {
+      PreparedStatement preparedStatement =
+          c.prepareStatement("UPDATE hospitaldb.nodes SET xcoord = ?, ycoord = ? WHERE nodeID = ?");
+
+      preparedStatement.setInt(1, xcoord);
+      preparedStatement.setInt(2, ycoord);
+      preparedStatement.setString(3, nodeId);
+
+      preparedStatement.executeUpdate();
+      System.out.println("Updated Coordinates");
+    } catch (SQLException e) {
+      e.printStackTrace();
+      // Handle the exception appropriately
+    }
+  }
+
+  public List<Node> getAllNodes() {
+    return null;
+  }
+
+  public void deleteNode(Node target) {
+  }
 
 	public void addNode(Node thisNode) {
 		try {
