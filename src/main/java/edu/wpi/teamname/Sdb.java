@@ -5,10 +5,8 @@ import edu.wpi.teamname.FloorDatabase.Edge;
 import edu.wpi.teamname.FloorDatabase.Node;
 import edu.wpi.teamname.FloorDatabase.csvConverter;
 import edu.wpi.teamname.algorithms.AStar;
-import edu.wpi.teamname.algorithms.BFS;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
@@ -21,13 +19,13 @@ public class Sdb {
         "Please enter the path to the CSV that contains the information for the nodes."
             + "\nIf you have no path to specify, then please press 1 and the program will use a preloaded database:");
     String temp = sc.nextLine();
-    if (temp.equals("1")) floorPath = temp;
+    if (!temp.equals("1")) floorPath = temp;
 
     System.out.println(
         "Please enter the path to the CSV that contains the information for the edges. "
             + "\nIf you have no path to specify, then please press 1 and the program will use a preloaded databased:");
     temp = sc.nextLine();
-    if (temp.equals("1")) edgePath = temp;
+    if (!temp.equals("1")) edgePath = temp;
 
     csvConverter converter = new csvConverter();
     converter.csvToNode(floorPath);
@@ -143,13 +141,14 @@ public class Sdb {
           break;
         case "BFS":
           {
-            System.out.println(
-                "You selected to run a BFS search. Pleas enter the name of the first node:");
-            String id1 = sc.nextLine();
-            System.out.println("Please enter the name of the second node");
-            String id2 = sc.nextLine();
-            BFS bfs = new BFS(dbManager);
-            System.out.println(Arrays.toString(bfs.findPath(id1, id2).toArray()));
+//            System.out.println(
+//                "You selected to run a BFS search. Pleas enter the name of the first node:");
+//            String id1 = sc.nextLine();
+//            System.out.println("Please enter the name of the second node");
+//            String id2 = sc.nextLine();
+//            BFS bfs = new BFS(dbManager);
+//            System.out.println(Arrays.toString(bfs.findPath(id1, id2).toArray()));
+            System.out.println("Please use A* instead since it works");
             break;
           }
         case "Astar":
@@ -161,9 +160,12 @@ public class Sdb {
             String id2 = sc.nextLine();
             AStar astar = new AStar(dbManager);
             ArrayList<String> path = astar.findPath(id1, id2);
-            System.out.println(path);
+            System.out.println("The fastest path between these points is: \n" + path);
             break;
           }
+        case "help":
+          help();
+          break;
         case "exit":
           System.exit(0);
         default:
@@ -199,5 +201,6 @@ public class Sdb {
     System.out.println(
         "To run an A* search between nodes, please type 'Astar' and then submit the names of the start and end nodes");
     System.out.println("To exit, type 'exit'");
+    System.out.println("Type 'help' in order to see this menu again");
   }
 }

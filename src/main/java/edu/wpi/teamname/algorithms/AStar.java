@@ -36,16 +36,15 @@ public class AStar {
 
     while (nodesYetToSearch.size() != 0) {
       currentNode = nodesYetToSearch.poll();
-      if (currentNode.node == end) {
+      if (currentNode.node.getNodeID().equals(e)) {
         return constructShortestPath(currentNode.node, gotHereFrom);
       }
       //      dbManager.printLocalDatabases();
+      //      System.out.print(currentNode.node.getNodeID());
       for (String nodeToSearchID : edges.get(currentNode.node.getNodeID())) {
-        //        System.out.println(nodeToSearchID);
-        //        System.out.println(edges.get(nodeToSearchID).toString());
+        //        System.out.print(nodeToSearchID + "\t");
         Node nodeToSearch = floors.get(nodeToSearchID);
         if (!visitedNodes.contains(nodeToSearch)) {
-          visitedNodes.add(currentNode.node);
           double weight = calculateWeight(nodeToSearch, end);
           nodesYetToSearch.add(new HeuristicNode(nodeToSearch, weight));
           gotHereFrom.put(nodeToSearch, currentNode.node);

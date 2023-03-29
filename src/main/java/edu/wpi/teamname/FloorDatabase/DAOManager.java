@@ -191,27 +191,7 @@ public class DAOManager extends DAOImpl implements DAO_I {
           neighbors.add(data.getString("endNode"));
           neighbors.add(data.getString("startNode"));
         }
-        /*
-            Statement stmt = c.createStatement();
-        String getNodes = "SELECT nodeID FROM " + floorNodeTableName;
-        PreparedStatement getStartNeighbors =
-            c.prepareStatement("SELECT * FROM " + edgesTableName + " WHERE startNode = ?");
-        PreparedStatement getEndNeighbors =
-            c.prepareStatement("SELECT * FROM " + edgesTableName + " WHERE endNode = ?");
-        try {
-          ResultSet listOfNodes = stmt.executeQuery(getNodes);
-          while (listOfNodes.next()) {
-            String currentNode = listOfNodes.getString("nodeID");
-            getStartNeighbors.setString(1, currentNode);
-            getEndNeighbors.setString(1, currentNode);
-            ResultSet startData = getStartNeighbors.executeQuery();
-            ResultSet endData = getEndNeighbors.executeQuery();
-            HashSet<String> neighbors = new HashSet<>();
-            while (startData.next()) neighbors.add(startData.getString("endNode"));
-            while (endData.next()) neighbors.add(startData.getString("startNode"));
-            this.neighbors.put(currentNode, neighbors);
-          }
-             */
+        neighbors.remove(currentNode);
         this.neighbors.put(currentNode, neighbors);
       }
     } catch (SQLException e) {
