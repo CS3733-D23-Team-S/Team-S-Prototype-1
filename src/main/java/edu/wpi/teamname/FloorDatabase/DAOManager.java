@@ -68,10 +68,13 @@ public class DAOManager extends DAOImpl implements DAO_I {
     try {
       PreparedStatement preparedStatement =
           c.prepareStatement("UPDATE " + floorNodeTableName + " SET longname = ? WHERE nodeID = ?");
-
       preparedStatement.setString(1, longName);
       preparedStatement.setString(2, nodeId);
       Node temp = nodes.get(nodeId);
+      if (temp == null) {
+        System.out.println("This node is not in the database");
+        return;
+      }
       temp.setLongName(longName);
       nodes.put(nodeId, temp);
       preparedStatement.executeUpdate();
@@ -93,6 +96,10 @@ public class DAOManager extends DAOImpl implements DAO_I {
       preparedStatement.setInt(2, ycoord);
       preparedStatement.setString(3, nodeId);
       Node temp = nodes.get(nodeId);
+      if (temp == null) {
+        System.out.println("This node is not in the database");
+        return;
+      }
       temp.setXCoord(xcoord);
       temp.setXCoord(ycoord);
       nodes.put(nodeId, temp);
@@ -151,6 +158,8 @@ public class DAOManager extends DAOImpl implements DAO_I {
         nodes.put(nodeID, floorNode);
       }
     } catch (SQLException e) {
+      e.printStackTrace();
+      System.out.println(e.getSQLState());
       System.out.println("Error accessing the remote and constructing the list of nodes");
     }
   }
@@ -176,6 +185,26 @@ public class DAOManager extends DAOImpl implements DAO_I {
       }
     } catch (SQLException e) {
       System.out.println("Error accessing the remote and constructing the list of edges");
+    }
+  }
+
+  public void retrieveRow(String target) throws SQLException {
+    PreparedStatement statement =
+        c.prepareStatement("SELECT nodeID FROM " + floorNodeTableName + " WHERE nodeID = ?");
+    try {
+      statement.setString(1, target);
+      ResultSet data = statement.executeQuery();
+      data.next();
+      String nodeID = data.getString("nodeID");
+      if (nodes.get(nodeID) == null) {
+        System.out.println("This node is not in the database, so its row cannot be printed");
+        return;
+      }
+      System.out.println(nodes.get(nodeID).toString());
+
+    } catch (SQLException e) {
+      e.printStackTrace();
+      System.out.println(e.getSQLState());
     }
   }
 

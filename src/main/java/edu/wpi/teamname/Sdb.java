@@ -9,9 +9,9 @@ public class Sdb {
     converter.csvToNode("src/main/java/edu/wpi/teamname/L1Nodes.csv");
     converter.csvToEdges("src/main/java/edu/wpi/teamname/L1Edges.csv");
 
-    for (Edge thisEdge : converter.getEdges()) {
-      System.out.println(thisEdge.toString());
-    }
+    //    for (Edge thisEdge : converter.getEdges()) {
+    //      System.out.println(thisEdge.toString());
+    //    }
 
     DAOManager dbManager = new DAOManager();
     // Establish connection to database
@@ -30,11 +30,13 @@ public class Sdb {
       dbManager.addEdge(thisEdge);
     }
     dbManager.constructLocalDataBase();
-    dbManager.printLocalDatabases();
+    //    dbManager.printLocalDatabases();
     dbManager.updateLocationName("CLABS002L1", "White House");
     dbManager.updateCoord("CLABS002L1", 200, 300);
+    dbManager.retrieveRow("CLABS002L1");
     dbManager.deleteNode("CSERV001L2");
-    dbManager.printLocalDatabases();
+
+    //    dbManager.printLocalDatabases();
   }
 
   public static void help() {
