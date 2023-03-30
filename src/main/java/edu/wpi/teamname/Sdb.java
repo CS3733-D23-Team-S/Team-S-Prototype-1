@@ -1,5 +1,7 @@
 package edu.wpi.teamname;
 
+import edu.wpi.teamname.FloorDatabase.*;
+import java.io.IOException;
 import edu.wpi.teamname.FloorDatabase.DAOManager;
 import edu.wpi.teamname.FloorDatabase.Edge;
 import edu.wpi.teamname.FloorDatabase.Node;
@@ -58,6 +60,8 @@ public class Sdb {
     //    dbManager.updateCoord("CLABS002L1", 200, 300);
     //    dbManager.retrieveRow("CLABS002L1");
     //    dbManager.deleteNode("CSERV001L2");
+    dbManager.csvExporterNode("src/main/java/edu/wpi/teamname/expNodes.csv");
+    dbManager.csvExporterEdges("src/main/java/edu/wpi/teamname/expEdges.csv");
 
     //    dbManager.printLocalDatabases();
 

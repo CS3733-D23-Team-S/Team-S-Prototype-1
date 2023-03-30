@@ -1,8 +1,10 @@
 package edu.wpi.teamname.FloorDatabase;
 
-import java.sql.*;
+import java.io.*;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.HashMap;
 import java.util.HashSet;
 import lombok.Getter;
@@ -16,7 +18,14 @@ public class DAOManager extends DAOImpl implements DAO_I {
     neighbors = new HashMap<>();
     nodes = new HashMap<>();
   }
-
+  /**
+   * Constructs the ORM from the SQL table remote database. It constructs a HashMap<String nodeID,
+   * Node node> that represents the name of the node and then the actual node itself which contains
+   * all the data and a Hashmap<String nodeID, HashSet<String nodeID>> that represents the name of a
+   * node and then the list of nodes that are accessible from that node
+   *
+   * @throws SQLException error when there is an issue connecting/accessing the database
+   */
   @Override
   public void constructLocalDataBase() throws SQLException {
     if (!nodes.isEmpty()) nodes.clear();
@@ -25,6 +34,7 @@ public class DAOManager extends DAOImpl implements DAO_I {
     constructLocalNeighborsDB();
   }
 
+  /** @param thisNode Adds a node to the remote database */
   public void addNode(Node thisNode) {
     try {
       PreparedStatement preparedStatement =
@@ -42,13 +52,13 @@ public class DAOManager extends DAOImpl implements DAO_I {
       preparedStatement.setString(7, thisNode.getLongName());
       preparedStatement.setString(8, thisNode.getShortName());
       preparedStatement.executeUpdate();
-
     } catch (SQLException e) {
       e.printStackTrace();
       System.out.println(e.getSQLState());
     }
   }
 
+  /** @param thisEdge adds an edge to the remote database */
   public void addEdge(Edge thisEdge) {
     try {
       PreparedStatement preparedStatement =
@@ -69,6 +79,10 @@ public class DAOManager extends DAOImpl implements DAO_I {
 
   // Left if desired to use, but technically the above method will be faster and not rely on the
   // remote
+  /**
+   * @param nodeId the name of the node that needs to be updated
+   * @param longName the name that is going to replace the longName data contained in the node
+   */
   public void updateLocationName(String nodeId, String longName) {
     try {
       PreparedStatement preparedStatement =
@@ -140,6 +154,12 @@ public class DAOManager extends DAOImpl implements DAO_I {
   //		nodes.put(node.getNodeID(), node);
   //	}
 
+  /**
+   * Constructs the HashMap that represents the nodes in the database. See constructLocalDatabase()
+   * for more details
+   *
+   * @throws SQLException
+   */
   private void constructLocalFloorDataBase() throws SQLException {
     Statement stmt = c.createStatement();
     String listOfNodes = "SELECT * FROM " + floorNodeTableName;
@@ -225,6 +245,90 @@ public class DAOManager extends DAOImpl implements DAO_I {
     for (String key : neighbors.keySet()) {
       System.out.print(key + "\t");
       System.out.println(neighbors.get(key).toString());
+    }
+  }
+
+  public void csvExporterNode(String csvFilePath) throws IOException {
+
+    try {
+      String sql = "SELECT * FROM hospitaldb.nodes";
+
+      Statement statement = c.createStatement();
+
+      ResultSet result = statement.executeQuery(sql);
+
+      BufferedWriter fileWriter = new BufferedWriter(new FileWriter(csvFilePath));
+
+      fileWriter.write("nodeID,xcoord,ycoord,floor,building,nodetype,longname,shortname");
+
+      while (result.next()) {
+        String nodeid = result.getString("nodeid");
+        int xcoord = result.getInt("xcoord");
+        int ycoord = result.getInt("ycoord");
+        int floor = result.getInt("floor");
+        String building = result.getString("building");
+        int nodetype = result.getInt("nodetype");
+        String longname = result.getString("longname");
+        String shortname = result.getString("shortname");
+
+        String line =
+            String.format(
+                "%s,%d,%d,%d,%s,%d,%s,%s",
+                nodeid, xcoord, ycoord, floor, building, nodetype, longname, shortname);
+
+        fileWriter.newLine();
+        fileWriter.write(line);
+      }
+
+      statement.close();
+      fileWriter.close();
+
+    } catch (SQLException e) {
+      System.out.println("Database error:");
+      e.printStackTrace();
+    } catch (IOException e) {
+      System.out.println("File IO error:");
+      e.printStackTrace();
+    }
+  }
+
+  public void csvExporterEdges(String csvFilePath) throws FileNotFoundException {
+    {
+      PrintWriter writer = new PrintWriter(csvFilePath);
+      writer.print("");
+
+      try {
+        String sql = "SELECT * FROM hospitaldb.edges";
+
+        Statement statement = c.createStatement();
+
+        ResultSet result = statement.executeQuery(sql);
+
+        BufferedWriter fileWriter = new BufferedWriter(new FileWriter(csvFilePath));
+
+        fileWriter.write("startnode,endnode,edgeid");
+
+        while (result.next()) {
+          String startnode = result.getString("startnode");
+          String endnode = result.getString("endnode");
+          String edgeid = result.getString("edgeid");
+
+          String line = String.format("%s,%s,%s", startnode, endnode, edgeid);
+
+          fileWriter.newLine();
+          fileWriter.write(line);
+        }
+
+        statement.close();
+        fileWriter.close();
+
+      } catch (SQLException e) {
+        System.out.println("Database error:");
+        e.printStackTrace();
+      } catch (IOException e) {
+        System.out.println("File IO error:");
+        e.printStackTrace();
+      }
     }
   }
 }

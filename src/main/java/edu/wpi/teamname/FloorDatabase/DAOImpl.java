@@ -6,7 +6,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public abstract class DAOImpl {
+  /** Names and information used to connect to and set up the remote database */
   private static final String url = "jdbc:postgresql://database.cs.wpi.edu:5432/teamsdb";
+
   private static final String user = "teams";
   private static final String password = "teams160";
   protected static final String schemaName = "hospitaldb";
@@ -14,6 +16,7 @@ public abstract class DAOImpl {
   protected static final String edgesTableName = schemaName + "." + "edges";
   Connection c;
 
+  /** Establishes a connection to the remote server */
   public void establishConnection() {
     try {
       Class.forName("org.postgresql.Driver");
@@ -26,6 +29,11 @@ public abstract class DAOImpl {
     System.out.println("Opened database successfully");
   }
 
+  /**
+   * Initializes the SQL tables in the database and creates them if it does not exist
+   *
+   * @throws SQLException
+   */
   public void initTables() throws SQLException {
     Statement stmt = c.createStatement();
 
@@ -65,6 +73,11 @@ public abstract class DAOImpl {
     }
   }
 
+  /**
+   * Resets the entire database by dropping the entire Schema
+   *
+   * @throws SQLException
+   */
   public void resetData() throws SQLException {
     Statement stmt = c.createStatement();
     String resetCommand = "DROP SCHEMA IF EXISTS " + schemaName + " CASCADE";
