@@ -27,7 +27,7 @@
    <center>
       <AnchorPane prefHeight="130.0" prefWidth="1600.0" BorderPane.alignment="CENTER">
          <children>
-            <MFXButton layoutY="597.0" prefHeight="208.0" prefWidth="242.0" style="-fx-background-color: #000000; -fx-background-color: #D9D9D9; -fx-border-color: #000000;" text="Find Path">
+            <MFXButton fx:id="findPathButton" layoutY="597.0" prefHeight="208.0" prefWidth="242.0" style="-fx-background-color: #000000; -fx-background-color: #D9D9D9; -fx-border-color: #000000;" text="Find Path">
                <font>
                   <Font size="32.0" />
                </font></MFXButton>
@@ -89,7 +89,7 @@
                   <Color red="1.0" green="1.0" blue="1.0" opacity="0.8700000047683716" />
                </textFill>
             </MFXTextField>
-            <MFXTextField alignment="CENTER" layoutX="-1.0" layoutY="121.0" minHeight="-Infinity" prefHeight="45.0" prefWidth="486.0" style="-fx-background-color: #D9D9D9;">
+            <MFXTextField fx:id="startingLocation" alignment="CENTER" layoutX="-1.0" layoutY="121.0" minHeight="-Infinity" prefHeight="45.0" prefWidth="486.0" style="-fx-background-color: #D9D9D9;">
                <font>
                   <Font size="24.0" />
                </font>
@@ -102,7 +102,7 @@
                   <Color red="1.0" green="1.0" blue="1.0" opacity="0.8700000047683716" />
                </textFill>
             </MFXTextField>
-            <MFXTextField alignment="CENTER" layoutX="-1.0" layoutY="227.0" minHeight="-Infinity" prefHeight="45.0" prefWidth="486.0" style="-fx-background-color: #D9D9D9;">
+            <MFXTextField fx:id="destination" alignment="CENTER" layoutX="-1.0" layoutY="227.0" minHeight="-Infinity" prefHeight="45.0" prefWidth="486.0" style="-fx-background-color: #D9D9D9;">
                <font>
                   <Font size="24.0" />
                </font>
