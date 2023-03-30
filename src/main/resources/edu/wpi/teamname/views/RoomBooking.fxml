@@ -145,5 +145,10 @@
             </Pane>
          </children>
       </AnchorPane>
+      <MFXButton fx:id="backButton" prefHeight="73.0" prefWidth="106.0" style="-fx-border-width: 9; -fx-border-color: F8BC54;" text="&lt;">
+         <font>
+            <Font size="40.0" />
+         </font>
+      </MFXButton>
    </center>
 </BorderPane>
