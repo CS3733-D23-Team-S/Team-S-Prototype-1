@@ -5,13 +5,12 @@ import edu.wpi.teamname.navigation.Screen;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import javafx.fxml.FXML;
 
-public class SignageController {
-  @FXML MFXButton signageButton;
+public class MealDeliveryController {
 
-  @FXML MFXButton signageBack;
+  @FXML MFXButton backButton;
 
   @FXML
   public void initialize() {
-    signageBack.setOnMouseClicked(event -> Navigation.navigate(Screen.HOME));
+    backButton.setOnMouseClicked(event -> Navigation.navigate(Screen.HOME));
   }
 }

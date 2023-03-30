@@ -8,6 +8,8 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
 <BorderPane prefHeight="900.0" prefWidth="1600.0" style="-fx-background-color: #122E59;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamname.controllers.HomeController">
@@ -66,3 +68,25 @@
       </AnchorPane>
    </center>
 </BorderPane>
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamname.controllers.HomeController">
+   <children>
+      <MFXButton fx:id="navigateButton" text="Navigate">
+         <font>
+            <Font name="Nunito Sans Regular" size="16.0" />
+         </font>
+      </MFXButton>
+      <MFXButton fx:id="signageButton" text="Signage">
+         <font>
+            <Font size="16.0" />
+         </font>
+         <StackPane.margin>
+            <Insets bottom="-100.0" />
+         </StackPane.margin>
+      </MFXButton>
+      <MFXButton fx:id="mealdeliveryButton" text="Meal Delivery Button">
+         <StackPane.margin>
+            <Insets top="80.0" />
+         </StackPane.margin>
+      </MFXButton>
+   </children>
+</StackPane>

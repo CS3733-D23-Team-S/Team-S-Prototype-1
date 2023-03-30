@@ -24,9 +24,16 @@ public class HomeController {
   @FXML MFXButton helpButton;
 
   @FXML MFXButton homeToPathfindingButton;
+  @FXML MFXButton navigateButton;
+  @FXML MFXButton signageButton;
+  @FXML MFXButton mealdeliveryButton;
 
   @FXML
   public void initialize() {
+    navigateButton.setOnMouseClicked(event -> Navigation.navigate(Screen.SERVICE_REQUEST));
+
+    signageButton.setOnMouseClicked(event -> Navigation.navigate(Screen.SIGNAGE_PAGE));
+    mealdeliveryButton.setOnMouseClicked(event -> Navigation.navigate(Screen.MEAL_DELIVERY));
     // Adding the menu option to exit application
 
     mealDeliveryButton.setOnMouseClicked(event -> goToMealPage());
