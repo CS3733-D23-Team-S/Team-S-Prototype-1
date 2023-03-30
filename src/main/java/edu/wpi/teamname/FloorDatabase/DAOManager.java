@@ -58,7 +58,6 @@ public class DAOManager extends DAOImpl implements DAO_I {
     }
   }
 
-  /** @param thisEdge adds an edge to the remote database */
   public void addEdge(Edge thisEdge) {
     try {
       PreparedStatement preparedStatement =
@@ -120,7 +119,7 @@ public class DAOManager extends DAOImpl implements DAO_I {
         return;
       }
       temp.setXCoord(xcoord);
-      temp.setXCoord(ycoord);
+      temp.setYCoord(ycoord);
       nodes.put(nodeId, temp);
       preparedStatement.executeUpdate();
       System.out.println("Updated Coordinates");
@@ -158,7 +157,7 @@ public class DAOManager extends DAOImpl implements DAO_I {
    * Constructs the HashMap that represents the nodes in the database. See constructLocalDatabase()
    * for more details
    *
-   * @throws SQLException
+   * @throws SQLException on database error
    */
   private void constructLocalFloorDataBase() throws SQLException {
     Statement stmt = c.createStatement();
@@ -248,7 +247,7 @@ public class DAOManager extends DAOImpl implements DAO_I {
     }
   }
 
-  public void csvExporterNode(String csvFilePath) throws IOException {
+  public void csvExporterNode(String csvFilePath) {
 
     try {
       String sql = "SELECT * FROM hospitaldb.nodes";

@@ -40,9 +40,9 @@ public class Node {
         + " \n"
         + "coords=("
         + xCoord
-        + "\n"
+        + ", "
         + yCoord
-        + "\n"
+        + ")\n"
         + "floor="
         + floor
         + "\n"
