@@ -16,7 +16,7 @@
       <AnchorPane layoutX="30.0" layoutY="50.0" prefHeight="830.0" prefWidth="1460.0" style="-fx-background-color: 1D3D94;" BorderPane.alignment="CENTER">
          <children>
 
-            <Text fill="#1d3d94" layoutX="371.0" layoutY="432.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Conference Room Bookings" AnchorPane.bottomAnchor="734.6328125" AnchorPane.leftAnchor="70.0" AnchorPane.rightAnchor="914.640625" AnchorPane.topAnchor="100.0">
+            <Text fill="#1d3d94" layoutX="70.0" layoutY="149.3046875" strokeType="OUTSIDE" strokeWidth="0.0" text="Conference Room Bookings" AnchorPane.bottomAnchor="741.2994791666666" AnchorPane.leftAnchor="70.0" AnchorPane.rightAnchor="914.640625" AnchorPane.topAnchor="98.0">
                <font>
                   <Font name="Open Sans Bold" size="48.0" />
                </font>
@@ -121,28 +121,16 @@
                               <MFXButton onAction="#bookRoom" prefHeight="99.0" prefWidth="150.0" text=" " />
                            </children>
                         </HBox>
-                        <HBox prefHeight="100.0" prefWidth="200.0">
-                           <children>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="                           Room1                             " textAlignment="CENTER" wrappingWidth="148.6761245727539">
-                                 <font>
-                                    <Font size="24.0" />
-                                 </font>
-                              </Text>
-                              <MFXButton onAction="#bookRoom" prefHeight="99.0" prefWidth="150.0" text=" " />
-                              <MFXButton onAction="#bookRoom" prefHeight="99.0" prefWidth="150.0" text=" " />
-                              <MFXButton onAction="#bookRoom" prefHeight="99.0" prefWidth="150.0" text=" " />
-                              <MFXButton onAction="#bookRoom" prefHeight="99.0" prefWidth="150.0" text=" " />
-                              <MFXButton onAction="#bookRoom" prefHeight="99.0" prefWidth="150.0" text=" " />
-                              <MFXButton onAction="#bookRoom" prefHeight="99.0" prefWidth="150.0" text=" " />
-                              <MFXButton onAction="#bookRoom" prefHeight="99.0" prefWidth="150.0" text=" " />
-                              <MFXButton onAction="#bookRoom" prefHeight="99.0" prefWidth="150.0" text=" " />
-                              <MFXButton onAction="#bookRoom" prefHeight="99.0" prefWidth="150.0" text=" " />
-                           </children>
-                        </HBox>
+                        <HBox prefHeight="100.0" prefWidth="200.0" />
                      </children>
                   </VBox>
                </children>
             </Pane>
+            <MFXButton fx:id="backButton" layoutX="783.0" layoutY="844.0" prefHeight="30.0" prefWidth="30.0" style="-fx-border-width: 9; -fx-border-color: F8BC54;" text="&lt;">
+               <font>
+                  <Font size="30.0" />
+               </font>
+            </MFXButton>
          </children>
       </AnchorPane>
    </center>

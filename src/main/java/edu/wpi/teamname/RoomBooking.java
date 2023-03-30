@@ -2,14 +2,14 @@ package edu.wpi.teamname;
 
 public class RoomBooking {
 
-  String RoomNum;
-  String BookTime;
+  static String RoomNum;
+  static String BookTime;
 
   public String getRoomNum() {
     return RoomNum;
   }
 
-  public void setRoomNum(String roomNum) {
+  public static void setRoomNum(String roomNum) {
     RoomNum = roomNum;
   }
 
@@ -17,7 +17,7 @@ public class RoomBooking {
     return BookTime;
   }
 
-  public void setBookTime(String bookTime) {
+  public static void setBookTime(String bookTime) {
     BookTime = bookTime;
   }
 }
