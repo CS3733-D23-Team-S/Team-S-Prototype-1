@@ -2,6 +2,7 @@ package edu.wpi.teamname.controllers;
 
 import static edu.wpi.teamname.navigation.Screen.PATHFINDING;
 
+import edu.wpi.teamname.Main;
 import edu.wpi.teamname.navigation.Navigation;
 import edu.wpi.teamname.navigation.Screen;
 import io.github.palexdev.materialfx.controls.MFXButton;
@@ -10,30 +11,32 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 public class HomeController {
 
   @FXML MFXButton mealDeliveryButton;
   @FXML MFXButton reserveRoomButton;
-
-  @FXML MFXButton signageButton;
-
   @FXML MenuButton menuButton;
   @FXML MenuItem exitOption;
 
   @FXML MFXButton helpButton;
 
   @FXML MFXButton homeToPathfindingButton;
-  @FXML MFXButton navigateButton;
   @FXML MFXButton signageButton;
-  @FXML MFXButton mealdeliveryButton;
+  @FXML ImageView conferenceroom;
 
-  @FXML
+  @FXML ImageView mealdelivery;
+
   public void initialize() {
-    navigateButton.setOnMouseClicked(event -> Navigation.navigate(Screen.SERVICE_REQUEST));
+    Image mealImage = new Image(Main.class.getResource("images/Meal_Icon.jpg").toString());
+    mealdelivery.setImage(mealImage);
 
-    signageButton.setOnMouseClicked(event -> Navigation.navigate(Screen.SIGNAGE_PAGE));
-    mealdeliveryButton.setOnMouseClicked(event -> Navigation.navigate(Screen.MEAL_DELIVERY));
+    Image conferenceImage =
+        new Image(Main.class.getResource("images/Conference_room_icon.jpg").toString());
+    conferenceroom.setImage(conferenceImage);
+
     // Adding the menu option to exit application
 
     mealDeliveryButton.setOnMouseClicked(event -> goToMealPage());
@@ -54,7 +57,7 @@ public class HomeController {
   }
 
   public void goToMealPage() {
-    Navigation.navigate(Screen.SERVICE_REQUEST);
+    Navigation.navigate(Screen.MEAL_DELIVERY);
   }
 
   public void goToSignagePage() {

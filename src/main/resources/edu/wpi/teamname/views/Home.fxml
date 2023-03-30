@@ -44,15 +44,13 @@
                   <Font size="18.0" />
                </font>
             </MenuButton>
-            <ImageView fitHeight="72.0" fitWidth="78.0" layoutX="1074.0" layoutY="351.0" pickOnBounds="true" preserveRatio="true" translateX="-30.0">
+            <ImageView fx:id="conferenceroom" fitHeight="72.0" fitWidth="78.0" layoutX="1074.0" layoutY="351.0" pickOnBounds="true" preserveRatio="true" translateX="-30.0">
                <image>
-                  <Image url="@../../../../../../../../../../Desktop/SoftwareEngineeringCS3733/Conference_room_icon.jpg" />
+
                </image>
             </ImageView>
-            <ImageView fitHeight="72.0" fitWidth="78.0" layoutX="1045.0" layoutY="463.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../../../../../../../../Desktop/SoftwareEngineeringCS3733/Meal_Icon.jpg" />
-               </image>
+            <ImageView fx:id="mealdelivery" fitHeight="72.0" fitWidth="78.0" layoutX="1045.0" layoutY="463.0" pickOnBounds="true" preserveRatio="true">
+
             </ImageView>
             <MFXButton fx:id="helpButton" layoutX="1428.0" layoutY="813.0" onAction="#goToHelpPage" prefHeight="39.0" prefWidth="129.0" text="Help">
                <font>
@@ -68,25 +66,4 @@
       </AnchorPane>
    </center>
 </BorderPane>
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamname.controllers.HomeController">
-   <children>
-      <MFXButton fx:id="navigateButton" text="Navigate">
-         <font>
-            <Font name="Nunito Sans Regular" size="16.0" />
-         </font>
-      </MFXButton>
-      <MFXButton fx:id="signageButton" text="Signage">
-         <font>
-            <Font size="16.0" />
-         </font>
-         <StackPane.margin>
-            <Insets bottom="-100.0" />
-         </StackPane.margin>
-      </MFXButton>
-      <MFXButton fx:id="mealdeliveryButton" text="Meal Delivery Button">
-         <StackPane.margin>
-            <Insets top="80.0" />
-         </StackPane.margin>
-      </MFXButton>
-   </children>
-</StackPane>
+
