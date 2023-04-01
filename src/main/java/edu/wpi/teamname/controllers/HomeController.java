@@ -5,23 +5,31 @@ import static edu.wpi.teamname.navigation.Screen.PATHFINDING;
 import edu.wpi.teamname.navigation.Navigation;
 import edu.wpi.teamname.navigation.Screen;
 import io.github.palexdev.materialfx.controls.MFXButton;
-import java.awt.*;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
+import javafx.scene.image.ImageView;
 
 public class HomeController {
 
   @FXML MFXButton mealDeliveryButton;
   @FXML MFXButton reserveRoomButton;
 
-  @FXML MFXButton signageButton;
+  @FXML MFXButton loginButton;
 
-  @FXML MenuButton menuButton;
+  @FXML ButtonBar buttonBar;
+
+  @FXML MenuButton app;
+  @FXML Button buttonBarPathfinding;
+  @FXML Button buttonBarReserveRoom;
+  @FXML Button buttonBarMealDelivery;
+
   @FXML MenuItem exitOption;
 
-  @FXML MFXButton helpButton;
+  @FXML ImageView helpIcon;
 
   @FXML MFXButton homeToPathfindingButton;
 
@@ -31,15 +39,15 @@ public class HomeController {
 
     mealDeliveryButton.setOnMouseClicked(event -> goToMealPage());
     reserveRoomButton.setOnMouseClicked(event -> goToRoomPage());
-    signageButton.setOnMouseClicked(event -> goToSignagePage());
+    loginButton.setOnMouseClicked(event -> goToSignagePage());
+    helpIcon.setOnMouseClicked(event -> goToHelpPage());
     exitOption.setOnAction(event -> exitApplication());
     homeToPathfindingButton.setOnMouseClicked(event -> Navigation.navigate(PATHFINDING));
 
-    // event handler for exiting application
-
-    //    mealDeliveryButton.setOnMouseClicked(event ->
-    // Navigation.navigate(Screen.SERVICE_REQUEST));
-    //    reserveRoomButton.setOnMouseClicked(event -> Navigation.navigate(Screen.SERVICE_REQUEST));
+    // Menu bar button handlers
+    buttonBarPathfinding.setOnMouseClicked(event -> Navigation.navigate(PATHFINDING));
+    buttonBarMealDelivery.setOnMouseClicked(event -> goToMealPage());
+    buttonBarReserveRoom.setOnMouseClicked(event -> goToRoomPage());
   }
 
   public void goToRoomPage() {

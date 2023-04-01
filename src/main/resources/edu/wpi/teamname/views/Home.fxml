@@ -1,67 +1,91 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="900.0" prefWidth="1600.0" style="-fx-background-color: #122E59;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamname.controllers.HomeController">
+
+<BorderPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamname.controllers.HomeController">
    <center>
-      <AnchorPane prefHeight="800.0" prefWidth="800.0" translateX="-20.0">
+      <AnchorPane prefHeight="900.0" prefWidth="1600.0">
          <children>
-            <MFXButton fx:id="mealDeliveryButton" layoutX="594.0" layoutY="457.0" prefHeight="75.0" prefWidth="433.0" text="Meal Delivery">
-               <font>
-                  <Font size="36.0" />
-               </font>
-            </MFXButton>
-            <MFXButton fx:id="reserveRoomButton" layoutX="595.0" layoutY="349.0" prefHeight="75.0" prefWidth="431.0" text="Reserve a Room">
-               <font>
-                  <Font size="36.0" />
-               </font>
-            </MFXButton>
-            <MFXButton fx:id="signageButton" layoutX="759.0" layoutY="585.0" onAction="#goToSignagePage" text="Signage">
-               <font>
-                  <Font size="24.0" />
-               </font>
-            </MFXButton>
-            <Label fx:id="welcomeLabel" layoutX="614.0" layoutY="50.0" prefHeight="141.0" prefWidth="452.0" text="Welcome!" textFill="WHITE">
-               <font>
-                  <Font size="96.0" />
-               </font>
-            </Label>
-            <MenuButton fx:id="menuButton" layoutX="51.0" layoutY="42.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="122.0" text="Menu">
-              <items>
-                <MenuItem fx:id="exitOption" mnemonicParsing="false" onAction="#exitApplication" text="Exit" />
-              </items>
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </MenuButton>
-            <ImageView fitHeight="72.0" fitWidth="78.0" layoutX="1074.0" layoutY="351.0" pickOnBounds="true" preserveRatio="true" translateX="-30.0">
+            <ImageView fitHeight="900.0" fitWidth="1600.0" pickOnBounds="true">
                <image>
-                  <Image url="@../../../../../../../../../../Desktop/SoftwareEngineeringCS3733/Conference_room_icon.jpg" />
+                  <Image url="@../../../../../../../../../../Desktop/SoftwareEngineeringCS3733/Brigham%20and%20Women's%20Hospital%20Image.jpeg" />
                </image>
             </ImageView>
-            <ImageView fitHeight="72.0" fitWidth="78.0" layoutX="1045.0" layoutY="463.0" pickOnBounds="true" preserveRatio="true">
+            <Pane prefHeight="900.0" prefWidth="800.0" style="-fx-background-color: #FFFFFF; -fx-opacity: 0.6;">
+               <children>
+                  <ImageView fx:id="helpIcon" fitHeight="47.0" fitWidth="37.0" layoutX="31.0" layoutY="842.0" onMouseClicked="#goToHelpPage" pickOnBounds="true" preserveRatio="true" style="-fx-image: 10;">
+                     <image>
+                        <Image url="@../../../../../../../../../../Desktop/SoftwareEngineeringCS3733/1200px-Icon-round-Question_mark.svg.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Pane>
+            <Label fx:id="welcomeLabel" layoutX="51.0" layoutY="96.0" prefHeight="109.0" prefWidth="676.0" text="Welcome to Brigham and Women's Hospital!" textAlignment="CENTER" textFill="#1f1f1f">
+               <font>
+                  <Font name="Open Sans Regular" size="32.0" />
+               </font>
+            </Label>
+            <VBox alignment="CENTER" layoutX="104.0" layoutY="268.0" prefHeight="531.0" prefWidth="458.0" spacing="50.0" translateX="45.0">
+               <children>
+                  <MFXButton fx:id="homeToPathfindingButton" prefHeight="75.0" prefWidth="431.0" style="-fx-background-color: D9D9D9;" text="Pathfinding">
+                     <font>
+                        <Font name="Open Sans Regular" size="36.0" />
+                     </font>
+                  </MFXButton>
+                  <MFXButton fx:id="reserveRoomButton" prefHeight="75.0" prefWidth="431.0" style="-fx-background-color: D9D9D9;" text="Reserve a Room">
+                     <font>
+                        <Font name="Open Sans Regular" size="36.0" />
+                     </font>
+                  </MFXButton>
+                  <MFXButton fx:id="mealDeliveryButton" prefHeight="75.0" prefWidth="433.0" style="-fx-background-color: D9D9D9;" text="Meal Delivery">
+                     <font>
+                        <Font size="36.0" />
+                     </font>
+                  </MFXButton>
+                  <MFXButton fx:id="loginButton" onAction="#goToSignagePage" style="-fx-background-color: #122E59;" text="Login" textFill="WHITE">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </MFXButton>
+               </children>
+            </VBox>
+            <ImageView fitHeight="72.0" fitWidth="78.0" layoutX="562.0" layoutY="578.0" pickOnBounds="true" preserveRatio="true" translateX="45.0">
                <image>
                   <Image url="@../../../../../../../../../../Desktop/SoftwareEngineeringCS3733/Meal_Icon.jpg" />
                </image>
             </ImageView>
-            <MFXButton fx:id="helpButton" layoutX="1428.0" layoutY="813.0" onAction="#goToHelpPage" prefHeight="39.0" prefWidth="129.0" text="Help">
-               <font>
-                  <Font size="24.0" />
-               </font>
-            </MFXButton>
-            <MFXButton fx:id="homeToPathfindingButton" layoutX="595.0" layoutY="242.0" prefHeight="75.0" prefWidth="431.0" text="Pathfinding">
-               <font>
-                  <Font size="36.0" />
-               </font>
-            </MFXButton>
+            <ImageView fitHeight="73.0" fitWidth="76.0" layoutX="565.0" layoutY="572.0" pickOnBounds="true" preserveRatio="true" translateX="45.0" translateY="-125.0">
+               <image>
+                  <Image url="@../../../../../../../../../../Desktop/SoftwareEngineeringCS3733/Conference_room_icon.jpg" />
+               </image>
+            </ImageView>
+            <MenuBar prefHeight="44.0" prefWidth="800.0" />
+            <ButtonBar prefHeight="40.0" prefWidth="782.0">
+              <buttons>
+                  <MenuButton fx:id="appButton" mnemonicParsing="false" prefHeight="25.0" text="App">
+                    <items>
+                      <MenuItem fx:id="exitOption" mnemonicParsing="false" text="Exit" />
+                    </items>
+                  </MenuButton>
+                  <Button fx:id="buttonBarPathfinding" mnemonicParsing="false" text="Pathfinding" />
+                  <Button fx:id="buttonBarReserveRoom" mnemonicParsing="false" text="Reserve a Room" />
+                  <Button fx:id="buttonBarMealDelivery" mnemonicParsing="false" prefHeight="25.0" prefWidth="195.0" text="Meal Delivery" />
+              </buttons>
+            </ButtonBar>
          </children>
       </AnchorPane>
    </center>
