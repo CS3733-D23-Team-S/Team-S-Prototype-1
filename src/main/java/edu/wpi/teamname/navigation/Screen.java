@@ -8,6 +8,8 @@ public enum Screen {
   PATHFINDING("views/Pathfinding.fxml"),
   SERVICE_REQUEST("views/ServiceRequest.fxml"),
   SIGNAGE_PAGE("views/Signage.fxml"),
+
+  KITCHENFACILITIES_PAGE("views/KitchenFacilitiesPage.fxml"),
   MEAL_DELIVERY("views/MealDelivery.fxml");
 
   private final String filename;
