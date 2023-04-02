@@ -2,7 +2,6 @@ package edu.wpi.teamname;
 
 import io.github.palexdev.materialfx.controls.MFXTextField;
 
-
 public class MealDeliverySubmission {
   static String food;
   static MFXTextField room;
@@ -22,6 +21,4 @@ public class MealDeliverySubmission {
   public static void setRoom(MFXTextField room) {
     MealDeliverySubmission.room = room;
   }
-
-
 }

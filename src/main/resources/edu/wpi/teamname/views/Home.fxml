@@ -12,7 +12,7 @@
             <Font name="Nunito Sans Regular" size="16.0" />
          </font>
       </MFXButton>
-      <MFXButton fx:id="mealdeliveryButton" text="Meal Delivery Button">
+      <MFXButton fx:id="mealdelivery1Button" text="Meal Delivery Button">
          <StackPane.margin>
             <Insets top="80.0" />
          </StackPane.margin>
