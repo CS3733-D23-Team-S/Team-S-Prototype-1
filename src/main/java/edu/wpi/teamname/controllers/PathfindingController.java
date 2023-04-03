@@ -16,6 +16,10 @@ public class PathfindingController {
 
   @FXML MFXTextField destination;
 
+  @FXML MFXButton pathfindingToProfileButton;
+  @FXML MFXButton clearFieldsButton;
+  @FXML MFXButton emailTextualDirections;
+
   public void initialize() {
     pathfindingToHomeButton.setOnMouseClicked(event -> Navigation.navigate(Screen.HOME));
     findPathButton.setOnMouseClicked(

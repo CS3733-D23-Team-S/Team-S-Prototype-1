@@ -1,5 +1,7 @@
 package edu.wpi.teamname.controllers;
 
+import edu.wpi.teamname.navigation.Navigation;
+import edu.wpi.teamname.navigation.Screen;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import javafx.fxml.FXML;
@@ -43,5 +45,12 @@ public class KitchenStaffController {
   @FXML MFXTextField row5ETDelivery;
   @FXML MFXTextField row5OrderStatus;
 
-  public void initialize() {}
+  public void initialize() {
+    kitchenStaffToHomePage.setOnMouseClicked(event -> Navigation.navigate(Screen.HOME));
+    // nextOrdersButton.setOnMouseClicked(event -> ...)
+    // changes the listed orders to the next set of orders in the system
+
+    // previousOrdersButton.setOnMouseClicked(event -> ...)
+    // changes the listed orders to the previous set of orders in the system
+  }
 }
