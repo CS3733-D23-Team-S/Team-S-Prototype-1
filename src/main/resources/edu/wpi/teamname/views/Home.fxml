@@ -4,18 +4,10 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
 
 <BorderPane prefHeight="900.0" prefWidth="1600.0" style="-fx-background-color: #122E59;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamname.controllers.HomeController">
    <center>
@@ -51,9 +43,9 @@
             </MenuButton>
             <ImageView fx:id="conferenceroom" fitHeight="72.0" fitWidth="78.0" layoutX="1074.0" layoutY="351.0" pickOnBounds="true" preserveRatio="true" translateX="-30.0">
                <image>
-<?import io.github.palexdev.materialfx.controls.MFXButton?>
-<?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.text.Font?>
+
+
+
 
                </image>
             </ImageView>
@@ -70,9 +62,8 @@
                   <Font size="36.0" />
                </font>
             </MFXButton>
+            <MFXButton fx:id="loginButton" layoutX="784.0" layoutY="678.0" />
          </children>
       </AnchorPane>
    </center>
 </BorderPane>
-
-

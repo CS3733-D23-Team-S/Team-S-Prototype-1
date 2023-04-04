@@ -1,12 +1,12 @@
 package edu.wpi.teamname.controllers;
 
+import static edu.wpi.teamname.navigation.Screen.LOGIN_PAGE;
 import static edu.wpi.teamname.navigation.Screen.PATHFINDING;
 
 import edu.wpi.teamname.Main;
 import edu.wpi.teamname.navigation.Navigation;
 import edu.wpi.teamname.navigation.Screen;
 import io.github.palexdev.materialfx.controls.MFXButton;
-import java.awt.*;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuButton;
@@ -24,12 +24,18 @@ public class HomeController {
   @FXML MFXButton helpButton;
 
   @FXML MFXButton homeToPathfindingButton;
+
   @FXML MFXButton signageButton;
+
   @FXML ImageView conferenceroom;
 
   @FXML ImageView mealdelivery;
 
+  @FXML MFXButton loginButton;
+
   public void initialize() {
+    loginButton.setOnMouseClicked(event -> Navigation.navigate(LOGIN_PAGE));
+
     Image mealImage = new Image(Main.class.getResource("images/Meal_Icon.jpg").toString());
     mealdelivery.setImage(mealImage);
 
